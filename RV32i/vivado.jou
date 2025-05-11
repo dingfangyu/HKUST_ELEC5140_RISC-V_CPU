@@ -1,18 +1,17 @@
 #-----------------------------------------------------------
-# Vivado v2020.1 (64-bit)
-# SW Build 2902540 on Wed May 27 19:54:49 MDT 2020
-# IP Build 2902112 on Wed May 27 22:43:36 MDT 2020
-# Start of session at: Sat Mar 13 08:59:31 2021
-# Process ID: 41608
-# Current directory: D:/2021Spring/Arch/Project/RISC-V CPU/RV32i
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent35444 D:\2021Spring\Arch\Project\RISC-V CPU\RV32i\RV32i.xpr
-# Log file: D:/2021Spring/Arch/Project/RISC-V CPU/RV32i/vivado.log
-# Journal file: D:/2021Spring/Arch/Project/RISC-V CPU/RV32i\vivado.jou
+# Vivado v2023.1 (64-bit)
+# SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
+# IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
+# SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
+# Start of session at: Sat May 10 21:14:37 2025
+# Process ID: 8308
+# Current directory: C:/Users/fdingad/Desktop/RISC-V_CPU/RV32i
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent8100 C:\Users\fdingad\Desktop\RISC-V_CPU\RV32i\RV32i.xpr
+# Log file: C:/Users/fdingad/Desktop/RISC-V_CPU/RV32i/vivado.log
+# Journal file: C:/Users/fdingad/Desktop/RISC-V_CPU/RV32i\vivado.jou
+# Running On: CCVDIAI3013, OS: Windows, CPU Frequency: 2594 MHz, CPU Physical cores: 4, Host memory: 17178 MB
 #-----------------------------------------------------------
 start_gui
-open_project {D:/2021Spring/Arch/Project/RISC-V CPU/RV32i/RV32i.xpr}
+open_project C:/Users/fdingad/Desktop/RISC-V_CPU/RV32i/RV32i.xpr
+upgrade_project -migrate_output_products
 update_compile_order -fileset sources_1
-launch_simulation
-open_wave_config {D:/2021Spring/Arch/Project/RISC-V CPU/RV32i/Top_behav.wcfg}
-source Top.tcl
-relaunch_sim
