@@ -115,23 +115,23 @@ module RV32iPCPU(
    
    
    
-    Data_Stall _dstall_ (
-        .IF_ID_written_reg(IF_ID_written_reg),
-        .IF_ID_read_reg1(IF_ID_read_reg1),
-        .IF_ID_read_reg2(IF_ID_read_reg2),
+    // Data_Stall _dstall_ (
+    //     .IF_ID_written_reg(IF_ID_written_reg),
+    //     .IF_ID_read_reg1(IF_ID_read_reg1),
+    //     .IF_ID_read_reg2(IF_ID_read_reg2),
         
-        .ID_EXE_written_reg(ID_EXE_written_reg),
-        .ID_EXE_read_reg1(ID_EXE_read_reg1),
-        .ID_EXE_read_reg2(ID_EXE_read_reg2),
+    //     .ID_EXE_written_reg(ID_EXE_written_reg),
+    //     .ID_EXE_read_reg1(ID_EXE_read_reg1),
+    //     .ID_EXE_read_reg2(ID_EXE_read_reg2),
         
-        .EXE_MEM_written_reg(EXE_MEM_written_reg),
-        .EXE_MEM_read_reg1(EXE_MEM_read_reg1),
-        .EXE_MEM_read_reg2(EXE_MEM_read_reg2),
+    //     .EXE_MEM_written_reg(EXE_MEM_written_reg),
+    //     .EXE_MEM_read_reg1(EXE_MEM_read_reg1),
+    //     .EXE_MEM_read_reg2(EXE_MEM_read_reg2),
         
-        .PC_dstall(PC_dstall),
-        .IF_ID_dstall(IF_ID_dstall),
-        .ID_EXE_dstall(ID_EXE_dstall)
-        );
+    //     .PC_dstall(PC_dstall),
+    //     .IF_ID_dstall(IF_ID_dstall),
+    //     .ID_EXE_dstall(ID_EXE_dstall)
+    //     );
         
     Control_Stall _cstall_ (
         .Branch(Branch[1:0]),
@@ -154,11 +154,12 @@ module RV32iPCPU(
     //   2. PC
     // Out:
     //   1. PC_out: for fetching inst_in
-    REG32 _pc_ (
+    
+    REG32 _pc_ ( 
         .CE(V5),
         .clk(clk),
         .D(PC_wb[31:0]),
-        .rst(rst),
+        .rst(rst), // reset (in Top.v), then PC_out is initiallized as 0, 
         .Q(PC_out[31:0]),
         .PC_dstall(PC_dstall)
         );
@@ -178,14 +179,13 @@ module RV32iPCPU(
         .c(add_jalr_out[31:0])
         );
     Mux4to1b32  MUX5 (
-        .I0(PC_out[31:0] + 32'b0100),   // From IF stage
+        .I0(PC_out[31:0] + 32'b0100),   // From IF stage 
         .I1(add_branch_out[31:0]),      // Containing "PC" from ID stage
         .I2(add_jal_out[31:0]),         // From ID stage
         .I3(add_jalr_out[31:0]),        // From ID stage
         .s(Branch[1:0]),                // From ID
         .o(PC_wb[31:0])
         );
-
 
     REG_IF_ID _if_id_ (
         .clk(clk), .rst(rst), .CE(V5),
@@ -402,6 +402,17 @@ module RV32iPCPU(
     // Out:
     //   Data_out & mem_w, ALU_out(as Addr_out)
     
+        // not a single function unit??
+        // in Top.v:
+
+        // .ALU_out(addr_out),
+        // .data_out(data_out),
+        // .mem_w(data_valid),
+    
+        // if (data_valid == 1'b1) begin           // write data memory
+        //     Data_RAM[addr_out[15:2]] <= data_out;
+        // end
+
     REG_MEM_WB _mem_wb_ (
         .clk(clk), .rst(rst), .CE(V5),
         // Input
@@ -431,6 +442,8 @@ module RV32iPCPU(
        //   }
     //   4. ALU_out (Addr_out outside) (used at both MEM and WB)
     // Local:
+
+    // lui: Load Upper Imm; auipc: Add Upper Imm to PC
     wire [31:0] LoA_data;
 
     assign Wt_addr[4:0] = MEM_WB_inst_in[11:7]; // rd, except for branch and store instructions
@@ -447,4 +460,31 @@ module RV32iPCPU(
         .s(MEM_WB_DatatoReg[1:0]),
         .o(Wt_data[31:0]));
     
+
+
+    // ours: forwarding unit
+    Forwarding_Unit _forwarding_unit_ (
+        // input
+        .clk(clk), 
+        .IF_ID_written_reg(IF_ID_written_reg),
+        .IF_ID_read_reg1(IF_ID_read_reg1),
+        .IF_ID_read_reg2(IF_ID_read_reg2),
+        .ID_EXE_written_reg(ID_EXE_written_reg),
+        .ID_EXE_DatatoReg(ID_EXE_DatatoReg),
+        .ID_EXE_read_reg1(ID_EXE_read_reg1),
+        .ID_EXE_read_reg1(ID_EXE_read_reg1),
+        .ID_EXE_read_reg2(ID_EXE_read_reg2),
+        .ID_EXE_ALU_out(ID_EXE_ALU_out),
+        .EXE_MEM_written_reg(EXE_MEM_written_reg),
+        .EXE_MEM_read_reg1(EXE_MEM_read_reg1),
+        .EXE_MEM_read_reg2(EXE_MEM_read_reg2),
+        .data_in(data_in),
+
+        // output
+        .ID_EXE_ALU_A(ID_EXE_ALU_A),
+        .ID_EXE_ALU_B(ID_EXE_ALU_B),
+        .PC_dstall(PC_dstall),
+        .IF_ID_dstall(IF_ID_dstall),
+        .ID_EXE_dstall(ID_EXE_dstall),
+    );
 endmodule
