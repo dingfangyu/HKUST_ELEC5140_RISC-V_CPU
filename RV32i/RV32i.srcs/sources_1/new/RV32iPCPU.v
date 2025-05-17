@@ -472,7 +472,6 @@ module RV32iPCPU(
         .ID_EXE_written_reg(ID_EXE_written_reg),
         .ID_EXE_DatatoReg(ID_EXE_DatatoReg),
         .ID_EXE_read_reg1(ID_EXE_read_reg1),
-        .ID_EXE_read_reg1(ID_EXE_read_reg1),
         .ID_EXE_read_reg2(ID_EXE_read_reg2),
         .ID_EXE_ALU_out(ID_EXE_ALU_out),
         .EXE_MEM_written_reg(EXE_MEM_written_reg),
