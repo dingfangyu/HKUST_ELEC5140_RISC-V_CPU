@@ -44,7 +44,7 @@ module Data_Stall(
         IF_ID_dstall = 0;
         ID_EXE_dstall = 0;
         
-        if (ID_EXE_written_reg != 0 && ((ID_EXE_written_reg == IF_ID_read_reg1) || (ID_EXE_written_reg == IF_ID_read_reg2))) begin
+        if (ID_EXE_written_reg != 0 && ((ID_EXE_written_reg == IF_ID_read_reg1 && ForwardA != 2'b01) || (ID_EXE_written_reg == IF_ID_read_reg2 && ForwardB != 2'b01))) begin
                 PC_dstall = 1;
                 IF_ID_dstall = 1;
                 ID_EXE_dstall = 1;
