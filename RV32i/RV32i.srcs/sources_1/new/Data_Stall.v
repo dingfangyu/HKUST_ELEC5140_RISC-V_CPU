@@ -43,7 +43,7 @@ module Data_Stall(
         IF_ID_dstall = 0;
         ID_EXE_dstall = 0;
 
-        if (ForwardA != 0 || ForwardB != 0) begin
+        if (ForwardA != 0 && ForwardB != 0) begin
                 PC_dstall = 1;
                 IF_ID_dstall = 1;
                 ID_EXE_dstall = 1;
