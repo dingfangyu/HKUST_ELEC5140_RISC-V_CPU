@@ -26,7 +26,7 @@ module Forwarding_Unit(
         input [4:0] EXE_MEM_written_reg,// M.writereg
 
         output reg [1:0] ForwardA, // 00: no forward, 01: from E.ALUout, 10: from M.data_in
-        output reg [1:0] ForwardB, 
+        output reg [1:0] ForwardB
     );
 
     always @ (*) begin
