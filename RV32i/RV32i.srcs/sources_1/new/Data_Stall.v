@@ -53,6 +53,9 @@ module Data_Stall(
                         ||  
                         // M    
                         (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg1 && ForwardA == 2'b10)
+                        ||
+                        // no other insts are writting r1
+                        (ID_EXE_written_reg != IF_ID_read_reg1 && EXE_MEM_written_reg != IF_ID_read_reg1)
                 )  
                 && 
                 // r2 
@@ -62,6 +65,9 @@ module Data_Stall(
                         ||  
                         // M    
                         (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg2 && ForwardB == 2'b10)
+                        ||
+                        // no other insts are writting r2
+                        (ID_EXE_written_reg != IF_ID_read_reg2 && EXE_MEM_written_reg != IF_ID_read_reg2)
                 ) 
         ) begin 
                 PC_dstall = 0;
