@@ -43,8 +43,9 @@ module Data_Stall(
         PC_dstall = 0;
         IF_ID_dstall = 0;
         ID_EXE_dstall = 0;
+
         if (
-                // r1 is being written by some other insts (E, M), and can be forwarded from (E, M)
+                // r1 is being written by some other insts (E or M), and can be forwarded from (E or M)
                 (
                         // E
                         (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg1 && ForwardA == 2'b01)
@@ -62,10 +63,10 @@ module Data_Stall(
                         (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg2 && ForwardB == 2'b10)
                 ) 
         ) begin 
-                PC_dstall = 0;
-                IF_ID_dstall = 0;
-                ID_EXE_dstall = 0;
-        end else begin
+        //         PC_dstall = 0;
+        //         IF_ID_dstall = 0;
+        //         ID_EXE_dstall = 0;
+        // end else begin
                 PC_dstall = 1;
                 IF_ID_dstall = 1;
                 ID_EXE_dstall = 1;
