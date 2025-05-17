@@ -21,8 +21,8 @@
 
 
 module Data_Stall(
-        input [1:0] reg ForwardA, // 00: no forward, 01: from E.ALUout, 10: from M.data_in
-        input [1:0] reg ForwardB, 
+        input [1:0] ForwardA, // 00: no forward, 01: from E.ALUout, 10: from M.data_in
+        input [1:0] ForwardB, 
 
         input [4:0] IF_ID_written_reg,
         input [4:0] IF_ID_read_reg1,
@@ -42,7 +42,7 @@ module Data_Stall(
         PC_dstall = 0;
         IF_ID_dstall = 0;
         ID_EXE_dstall = 0;
-        
+
         // E.written_reg = D.read1 or D.read2
         if (ID_EXE_written_reg != 0 && (ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2)) begin
                 PC_dstall = 1;
