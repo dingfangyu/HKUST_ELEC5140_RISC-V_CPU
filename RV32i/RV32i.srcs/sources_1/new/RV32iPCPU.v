@@ -485,6 +485,6 @@ module RV32iPCPU(
         .ID_EXE_ALU_B(ID_EXE_ALU_B),
         .PC_dstall(PC_dstall),
         .IF_ID_dstall(IF_ID_dstall),
-        .ID_EXE_dstall(ID_EXE_dstall),
+        .ID_EXE_dstall(ID_EXE_dstall)
     );
 endmodule
