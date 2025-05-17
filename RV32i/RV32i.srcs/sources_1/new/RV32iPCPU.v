@@ -296,6 +296,12 @@ module RV32iPCPU(
         .RegWrite(RegWrite),
         //// For Data Hazard
         .written_reg(IF_ID_written_reg), .read_reg1(IF_ID_read_reg1), .read_reg2(IF_ID_read_reg2),
+
+        //ours 
+        .fwd1(fwd1),
+        .fwd2(fwd2),
+        .fwd_reg1_data(fwd_reg1_data),
+        .fwd_reg2_data(fwd_reg2_data),
         
         // Output
         .ID_EXE_inst_in(ID_EXE_inst_in),
@@ -463,6 +469,11 @@ module RV32iPCPU(
 
 
     // ours: forwarding unit
+    wire fwd1;
+    wire fwd2;
+    wire [31:0] fwd_reg1_data;
+    wire [31:0] fwd_reg2_data;
+
     Forwarding_Unit _forwarding_unit_ (
         // input
         .clk(clk), 
@@ -480,8 +491,10 @@ module RV32iPCPU(
         .data_in(data_in),
 
         // output
-        .ID_EXE_ALU_A(ID_EXE_ALU_A),
-        .ID_EXE_ALU_B(ID_EXE_ALU_B),
+        .fwd1(fwd1),
+        .fwd2(fwd2),
+        .fwd_reg1_data(fwd_reg1_data),
+        .fwd_reg2_data(fwd_reg2_data),
         .PC_dstall(PC_dstall),
         .IF_ID_dstall(IF_ID_dstall),
         .ID_EXE_dstall(ID_EXE_dstall)
