@@ -74,9 +74,9 @@ module Data_Stall(
                 IF_ID_dstall = 0;
                 ID_EXE_dstall = 0;
         end else begin
-                // PC_dstall = 1;
-                // IF_ID_dstall = 1;
-                // ID_EXE_dstall = 1;
+                PC_dstall = 1;
+                IF_ID_dstall = 1;
+                ID_EXE_dstall = 1;
         end
 
         end
