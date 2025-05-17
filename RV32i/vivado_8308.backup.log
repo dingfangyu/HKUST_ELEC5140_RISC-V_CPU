@@ -3,16 +3,15 @@
 # SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Sun May 18 00:36:57 2025
-# Process ID: 7840
+# Start of session at: Sat May 10 21:14:37 2025
+# Process ID: 8308
 # Current directory: C:/Users/fdingad/Desktop/RISC-V_CPU/RV32i
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent10084 C:\Users\fdingad\Desktop\RISC-V_CPU\RV32i\RV32i.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent8100 C:\Users\fdingad\Desktop\RISC-V_CPU\RV32i\RV32i.xpr
 # Log file: C:/Users/fdingad/Desktop/RISC-V_CPU/RV32i/vivado.log
 # Journal file: C:/Users/fdingad/Desktop/RISC-V_CPU/RV32i\vivado.jou
-# Running On: CCVDIAI3001, OS: Windows, CPU Frequency: 2594 MHz, CPU Physical cores: 4, Host memory: 17178 MB
+# Running On: CCVDIAI3013, OS: Windows, CPU Frequency: 2594 MHz, CPU Physical cores: 4, Host memory: 17178 MB
 #-----------------------------------------------------------
 start_gui
-open_project C:/Users/fdingad/Desktop/RISC-V_CPU/RV32i/RV32i.xpr
 WARNING: [Board 49-26] cannot add Board Part xilinx.com:kc705:part0:1.6 available at C:/Xilinx/Vivado/2023.1/data/xhub/boards/XilinxBoardStore/boards/Xilinx/kc705/1.6/board.xml as part xc7k325tffg900-2 specified in board_part file is either invalid or not available
 WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu105:part0:1.6 available at C:/Xilinx/Vivado/2023.1/data/xhub/boards/XilinxBoardStore/boards/Xilinx/kcu105/1.6/board.xml as part xcku040-ffva1156-2-e specified in board_part file is either invalid or not available
 WARNING: [Board 49-26] cannot add Board Part xilinx.com:kcu105:part0:1.7 available at C:/Xilinx/Vivado/2023.1/data/xhub/boards/XilinxBoardStore/boards/Xilinx/kcu105/1.7/board.xml as part xcku040-ffva1156-2-e specified in board_part file is either invalid or not available
@@ -72,10 +71,16 @@ WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216:part0:2.0 availab
 WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu216ld:part0:2.0 available at C:/Xilinx/Vivado/2023.1/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu216ld/production/2.0/board.xml as part xczu59dr-ffvf1760-2-i specified in board_part file is either invalid or not available
 WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670:part0:2.0 available at C:/Xilinx/Vivado/2023.1/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu670/2.0/board.xml as part xczu67dr-fsve1156-2-i specified in board_part file is either invalid or not available
 WARNING: [Board 49-26] cannot add Board Part xilinx.com:zcu670ld:part0:1.0 available at C:/Xilinx/Vivado/2023.1/data/xhub/boards/XilinxBoardStore/boards/Xilinx/zcu670ld/1.0/board.xml as part xczu57dr-fsve1156-2-i specified in board_part file is either invalid or not available
-INFO: [filemgmt 56-3] Default IP Output Path : Could not find the directory 'C:/Users/fdingad/Desktop/RISC-V_CPU/RV32i/RV32i.gen/sources_1'.
+open_project C:/Users/fdingad/Desktop/RISC-V_CPU/RV32i/RV32i.xpr
+INFO: [Project 1-313] Project file moved from 'D:/2021Spring/Arch/Project/RISC-V CPU/RV32i' since last save.
 Scanning sources...
 Finished scanning sources
+INFO: [Project 1-230] Project 'RV32i.xpr' upgraded for this version of Vivado.
 INFO: [IP_Flow 19-234] Refreshing IP repositories
 INFO: [IP_Flow 19-1704] No user IP repositories specified
 INFO: [IP_Flow 19-2313] Loaded Vivado IP repository 'C:/Xilinx/Vivado/2023.1/data/ip'.
-open_project: Time (s): cpu = 00:00:23 ; elapsed = 00:00:14 . Memory (MB): peak = 1419.742 ; gain = 128.148
+open_project: Time (s): cpu = 00:00:11 ; elapsed = 00:00:07 . Memory (MB): peak = 1244.324 ; gain = 41.270
+upgrade_project -migrate_output_products
+update_compile_order -fileset sources_1
+exit
+INFO: [Common 17-206] Exiting Vivado at Sat May 10 21:19:19 2025...

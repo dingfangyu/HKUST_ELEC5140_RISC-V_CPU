@@ -114,6 +114,10 @@ module RV32iPCPU(
    wire ID_EXE_dstall;
    
    
+    wire fwd1;
+    wire fwd2;
+    wire [31:0] fwd_reg1_data;
+    wire [31:0] fwd_reg2_data;
    
     // Data_Stall _dstall_ (
     //     .IF_ID_written_reg(IF_ID_written_reg),
@@ -469,14 +473,9 @@ module RV32iPCPU(
 
 
     // ours: forwarding unit
-    wire fwd1;
-    wire fwd2;
-    wire [31:0] fwd_reg1_data;
-    wire [31:0] fwd_reg2_data;
 
     Forwarding_Unit _forwarding_unit_ (
         // input
-        .clk(clk), 
         .IF_ID_written_reg(IF_ID_written_reg),
         .IF_ID_read_reg1(IF_ID_read_reg1),
         .IF_ID_read_reg2(IF_ID_read_reg2),

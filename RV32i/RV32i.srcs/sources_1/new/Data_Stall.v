@@ -38,8 +38,8 @@ module Forwarding_Unit(
 
         input [31:0] data_in, // M
 
-        output reg fwd1;
-        output reg fwd2;
+        output reg fwd1,
+        output reg fwd2,
         output reg [31:0] fwd_reg1_data,
         output reg [31:0] fwd_reg2_data,
         
