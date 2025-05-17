@@ -260,8 +260,6 @@ module RV32iPCPU(
         .o(ALU_B_before_fwd[31:0]
         ));
 
-    assign ALU_A = ALU_A_before_fwd;
-    assign ALU_B = ALU_B_before_fwd;
 
     wire [1:0] ForwardA; // 00: no forward; 01: from E.ALU_out; 10: from M.data_in
     wire [1:0] ForwardB;
