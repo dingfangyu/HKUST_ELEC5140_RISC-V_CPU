@@ -45,16 +45,16 @@ module Data_Stall(
                 (
                         // E
                         (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg1 && ForwardA == 2'b01)
-                        or  
+                        ||  
                         // M    
                         (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg1 && ForwardA == 2'b10)
                 )  
-                and 
+                && 
                 // r2 
                 (
                         // E
                         (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg2 && ForwardB == 2'b01)
-                        or  
+                        ||  
                         // M    
                         (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg2 && ForwardB == 2'b10)
                 ) 
