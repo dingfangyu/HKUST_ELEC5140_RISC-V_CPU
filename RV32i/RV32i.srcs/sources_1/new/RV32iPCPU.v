@@ -113,25 +113,7 @@ module RV32iPCPU(
    wire IF_ID_dstall;
    wire ID_EXE_dstall;
    
-   
-   
-    Data_Stall _dstall_ (
-        .IF_ID_written_reg(IF_ID_written_reg),
-        .IF_ID_read_reg1(IF_ID_read_reg1),
-        .IF_ID_read_reg2(IF_ID_read_reg2),
-        
-        .ID_EXE_written_reg(ID_EXE_written_reg),
-        .ID_EXE_read_reg1(ID_EXE_read_reg1),
-        .ID_EXE_read_reg2(ID_EXE_read_reg2),
-        
-        .EXE_MEM_written_reg(EXE_MEM_written_reg),
-        .EXE_MEM_read_reg1(EXE_MEM_read_reg1),
-        .EXE_MEM_read_reg2(EXE_MEM_read_reg2),
-        
-        .PC_dstall(PC_dstall),
-        .IF_ID_dstall(IF_ID_dstall),
-        .ID_EXE_dstall(ID_EXE_dstall)
-        );
+
         
     Control_Stall _cstall_ (
         .Branch(Branch[1:0]),
@@ -258,11 +240,15 @@ module RV32iPCPU(
              );
     SignExt _signed_ext_ (.inst_in(IF_ID_inst_in), .imm_32(Imm_32));
 
+    // ALU source A & B before data forwarding
+    wire [31:0] ALU_A_before_fwd;
+    wire [31:0] ALU_B_before_fwd;
+
     Mux2to1b32  _alu_source_A_ (
         .I0(rdata_A[31:0]),
         .I1(Imm_32[31:0]),   // not used 
         .s(ALUSrc_A),
-        .o(ALU_A[31:0])
+        .o(ALU_A_before_fwd[31:0])
         );
 
     Mux4to1b32  _alu_source_B_ (
@@ -271,8 +257,68 @@ module RV32iPCPU(
         .I2(),
         .I3(),
         .s(ALUSrc_B[1:0]),
+        .o(ALU_B_before_fwd[31:0]
+        ));
+
+    assign ALU_A = ALU_A_before_fwd;
+    assign ALU_B = ALU_B_before_fwd;
+
+    wire [1:0] ForwardA; // 00: no forward; 01: from E.ALU_out; 10: from M.data_in
+    wire [1:0] ForwardB;
+    Forwarding_Unit _forwarding_unit_(
+        // input
+        .IF_ID_read_reg1(IF_ID_read_reg1),
+        .IF_ID_read_reg2(IF_ID_read_reg2),
+
+        .ID_EXE_written_reg(ID_EXE_written_reg),
+        .EXE_MEM_written_reg(EXE_MEM_written_reg),
+
+        // output
+        .ForwardA(ForwardA),
+        .ForwardB(ForwardB)
+    );
+    
+    
+    Data_Stall _dstall_ (
+        // add forwardA forwardB signals to dstall module
+        .ForwardA(ForwardA),
+        .ForwardB(ForwardB),
+
+        .IF_ID_written_reg(IF_ID_written_reg),
+        .IF_ID_read_reg1(IF_ID_read_reg1),
+        .IF_ID_read_reg2(IF_ID_read_reg2),
+        
+        .ID_EXE_written_reg(ID_EXE_written_reg),
+        .ID_EXE_read_reg1(ID_EXE_read_reg1),
+        .ID_EXE_read_reg2(ID_EXE_read_reg2),
+        
+        .EXE_MEM_written_reg(EXE_MEM_written_reg),
+        .EXE_MEM_read_reg1(EXE_MEM_read_reg1),
+        .EXE_MEM_read_reg2(EXE_MEM_read_reg2),
+        
+        .PC_dstall(PC_dstall),
+        .IF_ID_dstall(IF_ID_dstall),
+        .ID_EXE_dstall(ID_EXE_dstall)
+        );
+
+    // after data forwarding
+    Mux4to1b32  _alu_source_A_with_forward_ (
+        .I0(ALU_A_before_fwd[31:0]),
+        .I1(ID_EXE_ALU_out[31:0]), // from E
+        .I2(data_in[31:0]), // from M
+        .I3(),
+        .s(ForwardA[1:0]),
+        .o(ALU_A[31:0]
+        ));
+    Mux4to1b32  _alu_source_B_with_forward_ (
+        .I0(ALU_B_before_fwd[31:0]),
+        .I1(ID_EXE_ALU_out[31:0]), // from E
+        .I2(data_in[31:0]), // from M
+        .I3(),
+        .s(ForwardB[1:0]),
         .o(ALU_B[31:0]
         ));
+
     assign IF_ID_Data_out = rdata_B;
     ID_Zero_Generator _id_zero_ (.A(ALU_A), .B(ALU_B), .ALU_operation(ALU_Control), .zero(zero));
 

@@ -20,41 +20,35 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module Forwarding_Unit(
-        input [4:0] IF_ID_written_reg,
-        input [4:0] IF_ID_read_reg1,
-        input [4:0] IF_ID_read_reg2,
+        input [4:0] IF_ID_read_reg1, // D.readreg
+        input [4:0] IF_ID_read_reg2, // D.readreg
+        input [4:0] ID_EXE_written_reg, // E.writereg
+        input [4:0] EXE_MEM_written_reg,// M.writereg
 
-        input [4:0] ID_EXE_written_reg,
-        input [1:0] ID_EXE_DatatoReg,
-        input [4:0] ID_EXE_read_reg1,
-        input [4:0] ID_EXE_read_reg2,
-        input [31:0] ID_EXE_ALU_out,
-
-        input [4:0] EXE_MEM_written_reg,
-        input [1:0] EXE_MEM_DatatoReg,
-        input [4:0] EXE_MEM_read_reg1,
-        input [4:0] EXE_MEM_read_reg2, 
-
-        input [31:0] data_in, // M
-
-        output reg fwd1,
-        output reg fwd2,
-        output reg [31:0] fwd_reg1_data,
-        output reg [31:0] fwd_reg2_data,
-        
-        output reg PC_dstall,
-        output reg IF_ID_dstall,
-        output reg ID_EXE_dstall       
+        output [1:0] reg ForwardA, // 00: no forward, 01: from E.ALUout, 10: from M.data_in
+        output [1:0] reg ForwardB, 
     );
 
     always @ (*) begin
-        PC_dstall = 0;
-        IF_ID_dstall = 0;
-        ID_EXE_dstall = 0;
+        ForwardA = 2'b00;
+        if (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg1) begin 
+            ForwardA = 2'b01;
+        end else if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg1) begin 
+            ForwardA = 2'b10;
+        end
 
-        fwd1 = 0;
-        fwd2 = 0;
-        
+        ForwardB = 2'b00;
+        if (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg2) begin 
+            ForwardB = 2'b01;
+        end else if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg2) begin 
+            ForwardB = 2'b10;
+        end
+    end 
+endmodule
+
+
+/*
+
 
         // the current inst is at stage D, if there are some prev ALU operation inst (written_reg != 0 and DatatoReg == 2'b00) at stage E computing the required IF_ID_read_reg1 or IF_ID_read_reg2 for the curr inst, then do not stall, and forward E's ALU_out to the pipeline buffer ID_EX_read_reg 1 or 2 at the next cycle; else, stall curr D, also stall curr E and next F which are blocked by curr E
         if (ID_EXE_written_reg != 0 && (ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2)) 
@@ -93,6 +87,4 @@ module Forwarding_Unit(
             end 
         end
     end
-
-
-endmodule
+*/
