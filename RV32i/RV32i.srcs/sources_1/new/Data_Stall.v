@@ -63,10 +63,10 @@ module Data_Stall(
                         (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg2 && ForwardB == 2'b10)
                 ) 
         ) begin 
-        //         PC_dstall = 0;
-        //         IF_ID_dstall = 0;
-        //         ID_EXE_dstall = 0;
-        // end else begin
+                PC_dstall = 0;
+                IF_ID_dstall = 0;
+                ID_EXE_dstall = 0;
+        end else begin
                 PC_dstall = 1;
                 IF_ID_dstall = 1;
                 ID_EXE_dstall = 1;
