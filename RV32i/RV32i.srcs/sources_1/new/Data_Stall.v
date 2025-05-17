@@ -101,6 +101,6 @@ module Data_Stall(
         //         ID_EXE_dstall = 1;
         // end
 
-        end
+        // end
     end
 endmodule
