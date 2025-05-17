@@ -40,6 +40,9 @@ module Data_Stall(
     );
     always @ (*) begin
 
+        PC_dstall = 0;
+        IF_ID_dstall = 0;
+        ID_EXE_dstall = 0;
         if (
                 // r1 is being written by some other insts (E, M), and can be forwarded from (E, M)
                 (
