@@ -34,14 +34,15 @@ module Forwarding_Unit(
         input [31:0] ID_EXE_ALU_out,
 
         input [4:0] EXE_MEM_written_reg,
+        input [1:0] EXE_MEM_DatatoReg,
         input [4:0] EXE_MEM_read_reg1,
         input [4:0] EXE_MEM_read_reg2, 
 
         input [31:0] data_in, // M
 
         
-        output [31:0] ID_EXE_ALU_A,
-        output [31:0] ID_EXE_ALU_B,
+        output reg [31:0] ID_EXE_ALU_A,
+        output reg [31:0] ID_EXE_ALU_B,
         
         output reg PC_dstall,
         output reg IF_ID_dstall,
