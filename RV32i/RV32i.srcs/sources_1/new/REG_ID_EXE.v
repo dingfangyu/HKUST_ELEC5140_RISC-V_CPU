@@ -39,11 +39,6 @@ module REG_ID_EXE(
         input [4:0] written_reg,
         input [4:0] read_reg1,
         input [4:0] read_reg2,
-
-        input fwd1,
-        input fwd2,
-        input [31:0] fwd_reg1_data,
-        input [31:0] fwd_reg2_data,
         
         output reg [31:0] ID_EXE_inst_in,
         output reg [31:0] ID_EXE_PC = 0,
@@ -88,18 +83,8 @@ module REG_ID_EXE(
             ID_EXE_RegWrite     <= RegWrite;
             
             ID_EXE_written_reg  <= written_reg;
-            
-            if (fwd1 == 1'b1) begin
-                ID_EXE_read_reg1    <= fwd_reg1_data;
-            end else begin
-                ID_EXE_read_reg1    <= read_reg1;
-            end
-
-            if (fwd2 == 1'b1) begin
-                ID_EXE_read_reg2    <= fwd_reg2_data;
-            end else begin
-                ID_EXE_read_reg2    <= read_reg2;
-            end
+            ID_EXE_read_reg1    <= read_reg1;
+            ID_EXE_read_reg2    <= read_reg2;
         end
     end   
 endmodule
