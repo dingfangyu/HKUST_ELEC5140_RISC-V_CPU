@@ -44,13 +44,16 @@ module Data_Stall(
         IF_ID_dstall = 0;
         ID_EXE_dstall = 0;
 
-        // E is producing r1 or r2
+        // E is potentially producing r1 or r2
         if (ID_EXE_written_reg != 0 && (ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2)) begin
-                // E is producing r1 or r2
+                // E is really producing r1 or r2
                 if (
                         (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg1 && ForwardA == 2'b01) ||
                         (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg2 && ForwardB == 2'b01) 
                 ) begin
+                        PC_dstall = 0;
+                        IF_ID_dstall = 0;
+                        ID_EXE_dstall = 0;
                 end 
                 else begin
                         PC_dstall = 1;
@@ -58,11 +61,22 @@ module Data_Stall(
                         ID_EXE_dstall = 1;
                 end
         end
-        // M is producing r1 or r2
+        // M is potentially producing r1 or r2
         else if (EXE_MEM_written_reg != 0 && (EXE_MEM_written_reg == IF_ID_read_reg1 || EXE_MEM_written_reg == IF_ID_read_reg2)) begin
-                // PC_dstall = 1;
-                // IF_ID_dstall = 1;
-                // ID_EXE_dstall = 1;
+                // M is really producing r1 or r2
+                if (
+                        (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg1 && ForwardA == 2'b10) ||
+                        (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg2 && ForwardB == 2'b10)
+                ) begin
+                        PC_dstall = 0;
+                        IF_ID_dstall = 0;
+                        ID_EXE_dstall = 0;
+                end 
+                else begin
+                        PC_dstall = 1;
+                        IF_ID_dstall = 1;
+                        ID_EXE_dstall = 1;
+                end
         end
 
         // if ((ID_EXE_written_reg != 0 && (ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2)) || (EXE_MEM_written_reg != 0 && (EXE_MEM_written_reg == IF_ID_read_reg1 || EXE_MEM_written_reg == IF_ID_read_reg2))) begin
