@@ -39,26 +39,33 @@ module Data_Stall(
         output reg ID_EXE_dstall       
     );
     always @ (*) begin
-        PC_dstall = 0;
-        IF_ID_dstall = 0;
-        ID_EXE_dstall = 0;
 
-        if (ForwardA != 0 && ForwardB != 0) begin
+        if (
+                // r1 is being written by some other insts (E, M), and can be forwarded from (E, M)
+                (
+                        // E
+                        (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg1 && ForwardA == 2'b01)
+                        or  
+                        // M    
+                        (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg1 && ForwardA == 2'b10)
+                )  
+                and 
+                // r2 
+                (
+                        // E
+                        (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg2 && ForwardB == 2'b01)
+                        or  
+                        // M    
+                        (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg2 && ForwardB == 2'b10)
+                ) 
+        ) begin 
+                PC_dstall = 0;
+                IF_ID_dstall = 0;
+                ID_EXE_dstall = 0;
+        end else begin
                 PC_dstall = 1;
                 IF_ID_dstall = 1;
                 ID_EXE_dstall = 1;
         end
-        // E.written_reg = D.read1 or D.read2
-        // if (ID_EXE_written_reg != 0 && (ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2)) begin
-        //         PC_dstall = 1;
-        //         IF_ID_dstall = 1;
-        //         ID_EXE_dstall = 1;
-        // end
-        // // M.written_reg = D.read1 or D.read2
-        // else if (EXE_MEM_written_reg != 0 && (EXE_MEM_written_reg == IF_ID_read_reg1 || EXE_MEM_written_reg == IF_ID_read_reg2)) begin
-        //         PC_dstall = 1;
-        //         IF_ID_dstall = 1;
-        //         ID_EXE_dstall = 1;
-        // end
     end
 endmodule

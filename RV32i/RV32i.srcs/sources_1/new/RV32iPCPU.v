@@ -269,7 +269,9 @@ module RV32iPCPU(
         .IF_ID_read_reg2(IF_ID_read_reg2),
 
         .ID_EXE_written_reg(ID_EXE_written_reg),
+        .ID_EXE_DatatoReg(ID_EXE_DatatoReg),
         .EXE_MEM_written_reg(EXE_MEM_written_reg),
+        .EXE_MEM_DatatoReg(EXE_MEM_DatatoReg),
 
         // output
         .ForwardA(ForwardA),
