@@ -240,38 +240,15 @@ module RV32iPCPU(
              );
     SignExt _signed_ext_ (.inst_in(IF_ID_inst_in), .imm_32(Imm_32));
 
-    // data forwarding
-    wire [31:0] rdata_A_fwd;
-    wire [31:0] rdata_B_fwd;
-    wire [1:0] ForwardA;
-    wire [1:0] ForwardB;
-    Mux4to1b32  _rA_fwd_ (
-        .I0(rdata_A[31:0]),
-        .I1(EXE_MEM_ALU_out[31:0]), 
-        .I2(MEM_WB_Data_in[31:0]), 
-        .I3(),
-        .s(ForwardA[1:0]),
-        .o(rdata_A_fwd[31:0]
-        ));
-
-    Mux4to1b32  _rB_fwd_ (
-        .I0(rdata_B[31:0]),
-        .I1(EXE_MEM_ALU_out[31:0]), 
-        .I2(MEM_WB_Data_in[31:0]), 
-        .I3(),
-        .s(ForwardB[1:0]),
-        .o(rdata_B_fwd[31:0]
-        ));
-
     Mux2to1b32  _alu_source_A_ (
-        .I0(rdata_A_fwd[31:0]),
+        .I0(rdata_A[31:0]),
         .I1(Imm_32[31:0]),   // not used 
         .s(ALUSrc_A),
         .o(ALU_A[31:0])
         );
 
     Mux4to1b32  _alu_source_B_ (
-        .I0(rdata_B_fwd[31:0]),
+        .I0(rdata_B[31:0]),
         .I1(Imm_32[31:0]),
         .I2(),
         .I3(),
@@ -349,6 +326,9 @@ module RV32iPCPU(
     // Out:
     //   None
 
+
+    wire [1:0] ForwardA;
+    wire [1:0] ForwardB;
     Forwarding_Unit _forwarding_unit_(
         // input
         //// For Data Hazard
@@ -365,7 +345,36 @@ module RV32iPCPU(
         .ForwardB(ForwardB)
     );
 
+    // data forwarding
+    wire [31:0] ALU_A_fwd;
+    wire [31:0] ALU_B_fwd;
+    Mux4to1b32  _rA_fwd_ (
+        .I0(ID_EXE_ALU_A[31:0]),
+        .I1(EXE_MEM_ALU_out[31:0]), 
+        .I2(MEM_WB_Data_in[31:0]), 
+        .I3(),
+        .s(ForwardA[1:0]),
+        .o(ALU_A_fwd[31:0]
+        ));
 
+    Mux4to1b32  _rB_fwd_ (
+        .I0(ID_EXE_ALU_B[31:0]),
+        .I1(EXE_MEM_ALU_out[31:0]), 
+        .I2(MEM_WB_Data_in[31:0]), 
+        .I3(),
+        .s(ForwardB[1:0]),
+        .o(ALU_B_fwd[31:0]
+        ));
+    
+
+    ALU _alualu_ (
+        .A(ALU_A_fwd[31:0]),
+        .B(ALU_B_fwd[31:0]),
+        .ALU_operation(ID_EXE_ALU_Control[4:0]),
+        .res(ID_EXE_ALU_out[31:0]),
+        .overflow(),
+        .zero()
+        ); 
     
     Data_Stall _dstall_ (
         // add forwardA forwardB signals to dstall module
@@ -389,16 +398,6 @@ module RV32iPCPU(
         .ID_EXE_dstall(ID_EXE_dstall)
         );
 
-    
-
-    ALU _alualu_ (
-        .A(ID_EXE_ALU_A[31:0]),
-        .B(ID_EXE_ALU_B[31:0]),
-        .ALU_operation(ID_EXE_ALU_Control[4:0]),
-        .res(ID_EXE_ALU_out[31:0]),
-        .overflow(),
-        .zero()
-        ); 
 
     REG_EXE_MEM _exe_mem_ (
         .clk(clk), .rst(rst), .CE(V5),

@@ -22,8 +22,10 @@
 module Forwarding_Unit(
         input [4:0] ID_EXE_read_reg1,
         input [4:0] ID_EXE_read_reg2,
+
         input [1:0] EXE_MEM_DatatoReg,
         input [4:0] EXE_MEM_written_reg,
+        
         input [1:0] MEM_WB_DatatoReg,
         input [4:0] MEM_WB_written_reg,
 
