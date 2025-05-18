@@ -243,6 +243,8 @@ module RV32iPCPU(
     // data forwarding
     wire [31:0] rdata_A_fwd;
     wire [31:0] rdata_B_fwd;
+    wire [1:0] ForwardA;
+    wire [1:0] ForwardB;
     Mux4to1b32  _rA_fwd_ (
         .I0(rdata_A[31:0]),
         .I1(EXE_MEM_ALU_out[31:0]), 
