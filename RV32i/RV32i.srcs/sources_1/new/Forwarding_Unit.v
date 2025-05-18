@@ -39,19 +39,19 @@ module Forwarding_Unit(
     always @ (*) begin
         ForwardA = 2'b00;
 
-        if (EXE_MEM_RegWrite != 0 && EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg1 && EXE_MEM_DatatoReg == 2'b00) begin
+        if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg1 && EXE_MEM_DatatoReg == 2'b00) begin
             ForwardA = 2'b01; // E/M buffer -> E's alu_a alu_b
         end 
-        else if (MEM_WB_RegWrite != 0 && MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg1 && MEM_WB_DatatoReg == 2'b01) begin 
+        else if (MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg1 && MEM_WB_DatatoReg == 2'b01) begin 
             // load 
             ForwardA = 2'b10;
         end
 
         ForwardB = 2'b00;
-        if (EXE_MEM_RegWrite != 0 && EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg2 && EXE_MEM_DatatoReg == 2'b00) begin
+        if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg2 && EXE_MEM_DatatoReg == 2'b00) begin
             ForwardB = 2'b01;
         end 
-        else if (MEM_WB_RegWrite != 0 && MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg2 && MEM_WB_DatatoReg == 2'b01) begin 
+        else if (MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg2 && MEM_WB_DatatoReg == 2'b01) begin 
             // load 
             ForwardB = 2'b10;
         end
