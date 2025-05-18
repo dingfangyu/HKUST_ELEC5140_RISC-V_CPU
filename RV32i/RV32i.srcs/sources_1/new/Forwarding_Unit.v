@@ -40,17 +40,31 @@ module Forwarding_Unit(
         ForwardA = 2'b00;
         if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg1 && EXE_MEM_DatatoReg == 2'b00) begin
             // alu
+            /*
+            for the case:
+                F   D   E   M   W
+                    F   D   E|  M   W
+                        F   D  |E   M   W
+            forwarding happens at E -> E
+            */
             ForwardA = 2'b01; // E/M buffer. alu out -> E's alu_a 
         end 
         else if (MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg1 && MEM_WB_DatatoReg == 2'b01) begin 
-            // load: M/W buffer. data in -> E's alu_a 
+            // load: M/W buffer. data_in -> E's alu_a 
+            /*
+            for the case:
+                F   D   E   M|  W
+                    F   D   E   M   W
+                        F   D  |E   M   W
+            forwarding happens at M -> E
+            */
             ForwardA = 2'b10;
         end 
         else if (MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg1 && MEM_WB_DatatoReg == 2'b00) begin 
             // alu: M/W buffer. alu out -> E's alu_a 
             /*
             for the case:
-                F   D   E   M|  W
+                F   D   E   M|  W              ; E is where rd produced
                     F   D   E   M   W
                         F   D  |E   M   W
             forwarding happens at M -> E

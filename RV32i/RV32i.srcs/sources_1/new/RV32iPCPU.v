@@ -123,7 +123,9 @@ module RV32iPCPU(
         
     Control_Stall _cstall_ (
         .Branch(Branch[1:0]),
-        .IF_ID_cstall(IF_ID_cstall)
+        .PC_dstall(PC_dstall),
+        .IF_ID_cstall(IF_ID_cstall),
+        .ID_EXE_dstall(ID_EXE_dstall)
         );
 
     assign ALU_out = EXE_MEM_ALU_out;
