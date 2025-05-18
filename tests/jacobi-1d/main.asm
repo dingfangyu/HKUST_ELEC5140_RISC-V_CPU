@@ -72,7 +72,7 @@ addi t4, s3, 0 // addr of B
 init_loop_i:
 addi t1, t0, 2 // data for A[i]
 sw t1, 0(t3) // A[i] = i + 2
-addi t1, t1, 1 // data for B[i]
+addi t1, t1, 2 // data for B[i]
 sw t1, 0(t4) // B[i] = i + 3
 addi t3, t3, 4
 addi t4, t4, 4
@@ -87,3 +87,8 @@ lw t0, 32(s2) // t0 = A[8]
 srli t0, t0, 9 // t0 = 146744 >> 9 = 286 = 0x11e
 addi t0, t0, -285
 sw t0, 0(x0)
+
+
+// 4. set memory[0] to 1, which means finished
+addi t1, x0, 1
+sw t1, 0(x0)
