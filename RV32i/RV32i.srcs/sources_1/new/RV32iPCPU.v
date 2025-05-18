@@ -339,7 +339,7 @@ module RV32iPCPU(
         //   }
     //   6. ALU_A (stops here)
     //   7. ALU_B (stops here)
-    //   8. Data_out
+    //   8. Data_out 
     //   9. PC
     // Control Signals:
     //   1. ALU_Control
@@ -381,7 +381,7 @@ module RV32iPCPU(
     Mux4to1b32  _rA_fwd_ (
         .I0(ID_EXE_ALU_A[31:0]),
         .I1(EXE_MEM_ALU_out[31:0]), 
-        .I2(MEM_WB_Data_in[31:0]), 
+        .I2(Wt_data[31:0]), 
         .I3(),
         .s(ForwardA[1:0]),
         .o(ALU_A_fwd[31:0]
@@ -424,7 +424,7 @@ module RV32iPCPU(
         .inst_in(ID_EXE_inst_in),
         .PC(ID_EXE_PC),
         //// To MEM stage
-        .ALU_out(ID_EXE_ALU_out),
+        .ALU_out(ID_EXE_ALU_out), 
         .Data_out(ID_EXE_Data_out_fwd), // here also fwd, for sw
         .mem_w(ID_EXE_mem_w),
         //// To WB stage
