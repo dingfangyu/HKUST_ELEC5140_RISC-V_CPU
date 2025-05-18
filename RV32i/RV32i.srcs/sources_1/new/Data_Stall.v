@@ -34,6 +34,8 @@ module Data_Stall(
         input [4:0] EXE_MEM_read_reg1,
         input [4:0] EXE_MEM_read_reg2,
 
+        input [1:0] ID_EXE_DatatoReg,
+
         input [4:0] MEM_WB_written_reg,
         
         output reg PC_dstall,
@@ -45,17 +47,23 @@ module Data_Stall(
         PC_dstall = 0;
         IF_ID_dstall = 0;
         ID_EXE_dstall = 0;
+        if (ID_EXE_written_reg != 0 && ((ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2)) && ID_EXE_DatatoReg != 2'b00) begin 
+                PC_dstall = 1;
+                IF_ID_dstall = 1;
+                ID_EXE_dstall = 1;
+
+        end
         
-        if (EXE_MEM_written_reg != 0 && ((EXE_MEM_written_reg == ID_EXE_read_reg1 && ForwardA == 2'b00) || (EXE_MEM_written_reg == ID_EXE_read_reg2 && ForwardB == 2'b00))) begin
-                PC_dstall = 1;
-                IF_ID_dstall = 1;
-                ID_EXE_dstall = 1;
-        end
-        else if (MEM_WB_written_reg != 0 && ((MEM_WB_written_reg == ID_EXE_read_reg1 && ForwardA == 2'b00) || (MEM_WB_written_reg == ID_EXE_read_reg2 && ForwardB == 2'b00))) begin
-                PC_dstall = 1;
-                IF_ID_dstall = 1;
-                ID_EXE_dstall = 1;
-        end
+        // if (EXE_MEM_written_reg != 0 && ((EXE_MEM_written_reg == ID_EXE_read_reg1 && ForwardA == 2'b00) || (EXE_MEM_written_reg == ID_EXE_read_reg2 && ForwardB == 2'b00))) begin
+        //         PC_dstall = 1;
+        //         IF_ID_dstall = 1;
+        //         ID_EXE_dstall = 1;
+        // end
+        // else if (MEM_WB_written_reg != 0 && ((MEM_WB_written_reg == ID_EXE_read_reg1 && ForwardA == 2'b00) || (MEM_WB_written_reg == ID_EXE_read_reg2 && ForwardB == 2'b00))) begin
+        //         PC_dstall = 1;
+        //         IF_ID_dstall = 1;
+        //         ID_EXE_dstall = 1;
+        // end
 
         // if ((ID_EXE_written_reg != 0 && (ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2)) || (EXE_MEM_written_reg != 0 && (EXE_MEM_written_reg == IF_ID_read_reg1 || EXE_MEM_written_reg == IF_ID_read_reg2))) begin
                 
