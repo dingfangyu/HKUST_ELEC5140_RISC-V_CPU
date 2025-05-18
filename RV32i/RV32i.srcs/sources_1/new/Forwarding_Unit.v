@@ -24,9 +24,11 @@ module Forwarding_Unit(
         input [4:0] ID_EXE_read_reg2,
 
         input EXE_MEM_RegWrite,
+        input [1:0] EXE_MEM_DatatoReg,
         input [4:0] EXE_MEM_written_reg,
 
         input MEM_WB_RegWrite,
+        input [1:0] MEM_WB_DatatoReg,
         input [4:0] MEM_WB_written_reg,
 
         output reg [1:0] ForwardA, // 00: no forward, 01: from E/M.ALUout, 10: from M/W.data_in
@@ -38,18 +40,18 @@ module Forwarding_Unit(
         ForwardA = 2'b00;
 
         if (EXE_MEM_RegWrite != 0 && EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg1) begin
-            ForwardA = 2'b01;
+            ForwardA = (EXE_MEM_DatatoReg == 2'b00) ? 2'b01 : 2'b00;
         end 
-        else if (MEM_WB_RegWrite != 0 && MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg1) begin 
+        else if (MEM_WB_RegWrite != 0 && MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg1 && MEM_WB_DatatoReg == 2'b01) begin 
             // load 
             ForwardA = 2'b10;
         end
 
         ForwardB = 2'b00;
         if (EXE_MEM_RegWrite != 0 && EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg2) begin
-            ForwardB = 2'b01;
+            ForwardB = (EXE_MEM_DatatoReg == 2'b00) ? 2'b01 : 2'b00;
         end 
-        else if (MEM_WB_RegWrite != 0 && MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg2) begin 
+        else if (MEM_WB_RegWrite != 0 && MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg2 && MEM_WB_DatatoReg == 2'b01) begin 
             // load 
             ForwardB = 2'b10;
         end

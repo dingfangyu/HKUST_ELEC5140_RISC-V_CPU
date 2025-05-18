@@ -336,8 +336,10 @@ module RV32iPCPU(
         .ID_EXE_read_reg2(ID_EXE_read_reg2),
 
         .EXE_MEM_RegWrite(EXE_MEM_RegWrite),
+        .EXE_MEM_DatatoReg(EXE_MEM_DatatoReg),
         .EXE_MEM_written_reg(EXE_MEM_written_reg),
         .MEM_WB_RegWrite(MEM_WB_RegWrite),
+        .MEM_WB_DatatoReg(MEM_WB_DatatoReg),
         .MEM_WB_written_reg(Wt_addr),
 
         // output
