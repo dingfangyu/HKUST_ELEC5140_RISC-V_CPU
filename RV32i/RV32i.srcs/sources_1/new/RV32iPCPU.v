@@ -410,7 +410,7 @@ module RV32iPCPU(
         .EXE_MEM_written_reg(EXE_MEM_written_reg),
         .MEM_WB_RegWrite(MEM_WB_RegWrite),
         .MEM_WB_DatatoReg(MEM_WB_DatatoReg),
-        .MEM_WB_written_reg(Wt_addr),
+        .MEM_WB_written_reg(Wt_addr), //?????
 
         // output
         .ForwardA_D(ForwardA_D),
@@ -544,7 +544,8 @@ module RV32iPCPU(
     // Local:
     wire [31:0] LoA_data;
 
-    assign Wt_addr[4:0] = MEM_WB_inst_in[11:7]; // rd, except for branch and store instructions
+    // if branch, 00000
+    assign Wt_addr[4:0] = (MEM_WB_inst_in[6:0] != 7'b1100011) MEM_WB_inst_in[11:7] : 5'b00000; // rd, except for branch and store instructions
     LUI_or_AUIPC _loa_ (
         .inst_in(MEM_WB_inst_in[31:0]),
         .PC(MEM_WB_PC),
