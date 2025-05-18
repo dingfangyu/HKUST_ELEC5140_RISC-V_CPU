@@ -22,11 +22,7 @@
 
 module Control_Stall(
         input [1:0] Branch,
-        output reg IF_ID_cstall,
-
-        output reg PC_dstall,
-        output reg IF_ID_dstall,
-        output reg ID_EXE_dstall      
+        output reg IF_ID_cstall
     );
     always @ (*) begin
         IF_ID_cstall = 1'b0;
