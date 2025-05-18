@@ -295,7 +295,7 @@ module RV32iPCPU(
         );
     
 
-    assign IF_ID_Data_out = rdata_B
+    assign IF_ID_Data_out = rdata_B;
 
     wire [31:0] IF_ID_Data_out_fwd;
     // data forwarding, for IF_ID_Data_out of sw, the data is rs2 which should use ForwardB_D
