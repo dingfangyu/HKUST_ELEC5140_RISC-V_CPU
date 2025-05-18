@@ -20,36 +20,63 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 module Forwarding_Unit(
-        input [4:0] IF_ID_read_reg1, // D.readreg
-        input [4:0] IF_ID_read_reg2, // D.readreg
-        input [4:0] ID_EXE_written_reg, // E.writereg
-        input [1:0] ID_EXE_DatatoReg,   // E.data2reg, 00 from alu, 01 from mem
-        input [4:0] EXE_MEM_written_reg,// M.writereg
-        input [1:0] EXE_MEM_DatatoReg,   // E.data2reg
+        input [4:0] ID_EXE_read_reg1,
+        input [4:0] ID_EXE_read_reg2,
+        input [1:0] EXE_MEM_DatatoReg,
+        input [4:0] EXE_MEM_written_reg,
+        input [1:0] MEM_WB_DatatoReg,
+        input [4:0] MEM_WB_written_reg,
 
-        output reg [1:0] ForwardA, // 00: no forward, 01: from E.ALUout, 10: from M.data_in
+        output reg [1:0] ForwardA, // 00: no forward, 01: from E/M.ALUout, 10: from M/W.data_in
         output reg [1:0] ForwardB
+
+
     );
+
 
     always @ (*) begin
         ForwardA = 2'b00;
-        if (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg1) begin
-            if (ID_EXE_DatatoReg == 2'b00) begin // ALU op
+        if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg1) begin
+            if (EXE_MEM_DatatoReg == 2'b00) begin // ALU op
                 ForwardA = 2'b01;
             end 
-        end else if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg1 && ID_EXE_DatatoReg == 2'b01) begin 
+        end 
+        else if (MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg1 && MEM_WB_DatatoReg == 2'b01) begin // load 
             ForwardA = 2'b10;
         end
 
         ForwardB = 2'b00;
-        if (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg2) begin 
-            if (ID_EXE_DatatoReg == 2'b00) begin // ALU op
+        if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg2) begin 
+            if (EXE_MEM_DatatoReg == 2'b00) begin // ALU op
                 ForwardB = 2'b01;
             end
-        end else if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg2 && ID_EXE_DatatoReg == 2'b01) begin 
+        end 
+        else if (MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg2 && MEM_WB_DatatoReg == 2'b01) begin // load
             ForwardB = 2'b10;
         end
     end 
+
+
+
+    // always @ (*) begin
+    //     ForwardA = 2'b00;
+    //     if (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg1) begin
+    //         if (ID_EXE_DatatoReg == 2'b00) begin // ALU op
+    //             ForwardA = 2'b01;
+    //         end 
+    //     end else if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg1 && ID_EXE_DatatoReg == 2'b01) begin 
+    //         ForwardA = 2'b10;
+    //     end
+
+    //     ForwardB = 2'b00;
+    //     if (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg2) begin 
+    //         if (ID_EXE_DatatoReg == 2'b00) begin // ALU op
+    //             ForwardB = 2'b01;
+    //         end
+    //     end else if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg2 && ID_EXE_DatatoReg == 2'b01) begin 
+    //         ForwardB = 2'b10;
+    //     end
+    // end 
 endmodule
 
 
