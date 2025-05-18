@@ -299,7 +299,7 @@ module RV32iPCPU(
 
     wire [31:0] IF_ID_Data_out_fwd;
     // data forwarding, for IF_ID_Data_out of sw, the data is rs2 which should use ForwardB_D
-    Mux4to1b32  _data_out_fwd_ (
+    Mux4to1b32  _data_out_fwd_D_ (
         .I0(IF_ID_Data_out[31:0]),
         .I1(EXE_MEM_ALU_out[31:0]), 
         .I2(MEM_WB_Data_in[31:0]),  // MEM_WB_data_in
