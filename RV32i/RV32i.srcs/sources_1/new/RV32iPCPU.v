@@ -392,6 +392,8 @@ module RV32iPCPU(
         .EXE_MEM_written_reg(EXE_MEM_written_reg),
         .EXE_MEM_read_reg1(EXE_MEM_read_reg1),
         .EXE_MEM_read_reg2(EXE_MEM_read_reg2),
+
+        .MEM_WB_written_reg(MEM_WB_written_reg),
         
         .PC_dstall(PC_dstall),
         .IF_ID_dstall(IF_ID_dstall),

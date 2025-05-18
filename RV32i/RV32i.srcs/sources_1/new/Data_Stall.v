@@ -33,6 +33,8 @@ module Data_Stall(
         input [4:0] EXE_MEM_written_reg,
         input [4:0] EXE_MEM_read_reg1,
         input [4:0] EXE_MEM_read_reg2,
+
+        input [4:0] MEM_WB_written_reg,
         
         output reg PC_dstall,
         output reg IF_ID_dstall,
@@ -44,12 +46,12 @@ module Data_Stall(
         IF_ID_dstall = 0;
         ID_EXE_dstall = 0;
         
-        if (ID_EXE_written_reg != 0 && ((ID_EXE_written_reg == IF_ID_read_reg1 && ForwardA != 2'b01) || (ID_EXE_written_reg == IF_ID_read_reg2 && ForwardB != 2'b01))) begin
+        if (EXE_MEM_written_reg != 0 && ((EXE_MEM_written_reg == ID_EXE_read_reg1 && ForwardA != 2'b01) || (EXE_MEM_written_reg == ID_EXE_read_reg2 && ForwardB != 2'b01))) begin
                 PC_dstall = 1;
                 IF_ID_dstall = 1;
                 ID_EXE_dstall = 1;
         end
-        else if (EXE_MEM_written_reg != 0 && ((EXE_MEM_written_reg == IF_ID_read_reg1 && ForwardA == 2'b00) || (EXE_MEM_written_reg == IF_ID_read_reg2 && ForwardB == 2'b00))) begin
+        else if (MEM_WB_written_reg != 0 && ((MEM_WB_written_reg == ID_EXE_read_reg1 && ForwardA == 2'b00) || (MEM_WB_written_reg == ID_EXE_read_reg2 && ForwardB == 2'b00))) begin
                 PC_dstall = 1;
                 IF_ID_dstall = 1;
                 ID_EXE_dstall = 1;

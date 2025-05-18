@@ -44,11 +44,8 @@ module Forwarding_Unit(
             // load 
             ForwardA = 2'b10;
         end
-        
-
 
         ForwardB = 2'b00;
-
         if (EXE_MEM_RegWrite != 0 && EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg2) begin
             ForwardB = 2'b01;
         end 
