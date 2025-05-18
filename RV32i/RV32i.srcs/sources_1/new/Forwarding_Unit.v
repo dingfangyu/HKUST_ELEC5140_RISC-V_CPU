@@ -69,7 +69,7 @@ module Forwarding_Unit(
                         F   D  |E   M   W
             forwarding happens at M -> E
             */
-            ForwardA = 2'b11;
+            // ForwardA = 2'b11;
         end 
 
         ForwardB = 2'b00;
@@ -80,7 +80,7 @@ module Forwarding_Unit(
             ForwardB = 2'b10;
         end
         else if (MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg2 && MEM_WB_DatatoReg == 2'b00) begin 
-            ForwardB = 2'b11;
+            // ForwardB = 2'b11;
         end 
 
         
