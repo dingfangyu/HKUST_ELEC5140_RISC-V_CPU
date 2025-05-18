@@ -21,8 +21,6 @@
 
 
 module Data_Stall(
-        input [1:0] ForwardA, // 00: no forward, 01: from E.ALUout, 10: from M.data_in
-        input [1:0] ForwardB, 
 
         input [6:0] IF_ID_OPcode,
         input [4:0] IF_ID_written_reg,
@@ -36,8 +34,7 @@ module Data_Stall(
         input [4:0] EXE_MEM_read_reg2,
 
         input [1:0] ID_EXE_DatatoReg,
-        input [1:0] Branch,
-
+        
         input [1:0] EXE_MEM_DatatoReg,
 
         input [4:0] MEM_WB_written_reg,

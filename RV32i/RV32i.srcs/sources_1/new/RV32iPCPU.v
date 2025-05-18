@@ -267,19 +267,14 @@ module RV32iPCPU(
         .o(ALU_B[31:0]
         ));
 
+    // fwd
     Data_Stall _dstall_ (
-        // add forwardA forwardB signals to dstall module
-        
-        .ForwardA(ForwardA),
-        .ForwardB(ForwardB),
 
         .IF_ID_OPcode(IF_ID_inst_in[6:0]),
 
         .IF_ID_written_reg(IF_ID_written_reg),
         .IF_ID_read_reg1(IF_ID_read_reg1),
         .IF_ID_read_reg2(IF_ID_read_reg2),
-
-
         
         .ID_EXE_written_reg(ID_EXE_written_reg),
         .ID_EXE_read_reg1(ID_EXE_read_reg1),
@@ -294,17 +289,25 @@ module RV32iPCPU(
         .ID_EXE_DatatoReg(ID_EXE_DatatoReg),
         .EXE_MEM_DatatoReg(EXE_MEM_DatatoReg),
 
-        .Branch(Branch),
-
         .PC_dstall(PC_dstall),
         .IF_ID_dstall(IF_ID_dstall),
         .ID_EXE_dstall(ID_EXE_dstall)
         );
     
 
-    assign IF_ID_Data_out = rdata_B;
+    assign IF_ID_Data_out = rdata_B
 
-    // TODO: dstall for beq
+    wire [31:0] IF_ID_Data_out_fwd;
+    // data forwarding, for IF_ID_Data_out of sw, the data is rs2 which should use ForwardB_D
+    Mux4to1b32  _data_out_fwd_ (
+        .I0(IF_ID_Data_out[31:0]),
+        .I1(EXE_MEM_ALU_out[31:0]), 
+        .I2(MEM_WB_Data_in[31:0]),  // MEM_WB_data_in
+        .I3(MEM_WB_ALU_out[31:0]),
+        .s(ForwardB_D[1:0]),
+        .o(IF_ID_Data_out_fwd[31:0]
+        ));
+
 
     // D alu data forwarding
     Mux4to1b32  _rA_fwd_D_ (
@@ -338,7 +341,7 @@ module RV32iPCPU(
         //// To EXE stage, ALU operation control signal
         .ALU_Control(ALU_Control),
         //// To MEM stage, for sw instruction, data from rs2 register written into memory
-        .Data_out(IF_ID_Data_out),
+        .Data_out(IF_ID_Data_out_fwd), // !!!
         //// To MEM stage, for sw instruction, memor write enable signal
         .mem_w(IF_ID_mem_w),
         //// To WB stage, for choosing different data written back to register file
@@ -545,6 +548,7 @@ module RV32iPCPU(
     wire [31:0] LoA_data;
 
     // if branch or store, 00000
+    // 这是什么牛魔？
     assign Wt_addr[4:0] = (MEM_WB_inst_in[6:0] != 7'b1100011 && MEM_WB_inst_in[6:0] != 7'b0100011) ? MEM_WB_inst_in[11:7] : 5'b00000; // rd, except for branch and store instructions
     LUI_or_AUIPC _loa_ (
         .inst_in(MEM_WB_inst_in[31:0]),
