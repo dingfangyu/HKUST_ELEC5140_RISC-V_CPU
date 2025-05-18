@@ -114,6 +114,11 @@ module RV32iPCPU(
    wire ID_EXE_dstall;
 
    // data forwarding
+    wire [1:0] ForwardA_D;
+    wire [1:0] ForwardB_D;
+    wire [31:0] ALU_A_fwd_D;
+    wire [31:0] ALU_B_fwd_D;
+
     wire [1:0] ForwardA;
     wire [1:0] ForwardB;
     wire [31:0] ALU_A_fwd;
@@ -262,12 +267,14 @@ module RV32iPCPU(
         .o(ALU_B[31:0]
         ));
 
-
     Data_Stall _dstall_ (
         // add forwardA forwardB signals to dstall module
+        
         .ForwardA(ForwardA),
         .ForwardB(ForwardB),
 
+        .IF_ID_OPcode(IF_ID_inst_in[6:0]),
+        
         .IF_ID_written_reg(IF_ID_written_reg),
         .IF_ID_read_reg1(IF_ID_read_reg1),
         .IF_ID_read_reg2(IF_ID_read_reg2),
@@ -294,8 +301,28 @@ module RV32iPCPU(
 
     assign IF_ID_Data_out = rdata_B;
 
-    // data forwarding
-    ID_Zero_Generator _id_zero_ (.A(ALU_A_fwd), .B(ALU_B_fwd), .ALU_operation(ALU_Control), .zero(zero));
+    // TODO: dstall for beq
+
+    // D alu data forwarding
+    Mux4to1b32  _rA_fwd_D_ (
+        .I0(ALU_A[31:0]),
+        .I1(EXE_MEM_ALU_out[31:0]), 
+        .I2(MEM_WB_Data_in[31:0]), 
+        .I3(MEM_WB_ALU_out[31:0]),
+        .s(ForwardA_D[1:0]),
+        .o(ALU_A_fwd_D[31:0]
+        ));
+
+    Mux4to1b32  _rB_fwd_D_ (
+        .I0(ALU_B[31:0]),
+        .I1(EXE_MEM_ALU_out[31:0]), 
+        .I2(MEM_WB_Data_in[31:0]),  // MEM_WB_data_in
+        .I3(MEM_WB_ALU_out[31:0]),
+        .s(ForwardB_D[1:0]),
+        .o(ALU_B_fwd_D[31:0]
+        )); 
+
+    ID_Zero_Generator _id_zero_ (.A(ALU_A_fwd_D), .B(ALU_B_fwd_D), .ALU_operation(ALU_Control), .zero(zero));
 
     REG_ID_EXE _id_exe_ (
         .clk(clk), .rst(rst), .CE(V5), .ID_EXE_dstall(ID_EXE_dstall),
@@ -363,9 +390,14 @@ module RV32iPCPU(
     //   None
 
     // Forwarding unit, forward A B signals generation
+
     Forwarding_Unit _forwarding_unit_(
         // input
         //// For Data Hazard
+        .IF_ID_OPcode(IF_ID_inst_in[6:0]),
+        .IF_ID_read_reg1(IF_ID_read_reg1),
+        .IF_ID_read_reg2(IF_ID_read_reg2),
+
         .ID_EXE_read_reg1(ID_EXE_read_reg1), 
         .ID_EXE_read_reg2(ID_EXE_read_reg2),
 
@@ -377,6 +409,9 @@ module RV32iPCPU(
         .MEM_WB_written_reg(Wt_addr),
 
         // output
+        .ForwardA_D(ForwardA_D),
+        .ForwardB_D(ForwardB_D),
+        
         .ForwardA(ForwardA),
         .ForwardB(ForwardB)
     );

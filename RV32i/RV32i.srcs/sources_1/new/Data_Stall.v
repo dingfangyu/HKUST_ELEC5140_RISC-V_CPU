@@ -24,6 +24,7 @@ module Data_Stall(
         input [1:0] ForwardA, // 00: no forward, 01: from E.ALUout, 10: from M.data_in
         input [1:0] ForwardB, 
 
+        input [6:0] IF_ID_OPcode,
         input [4:0] IF_ID_written_reg,
         input [4:0] IF_ID_read_reg1,
         input [4:0] IF_ID_read_reg2,
@@ -49,19 +50,24 @@ module Data_Stall(
         IF_ID_dstall = 0;
         ID_EXE_dstall = 0;
 
-        // load-use hazard
-        if (ID_EXE_written_reg != 0 && ((ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2)) && ID_EXE_DatatoReg == 2'b01) begin 
+        // E load-use hazard, not branch
+        if (IF_ID_OPcode != 7'b1100011 && ID_EXE_written_reg != 0 && ((ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2)) && ID_EXE_DatatoReg == 2'b01) begin 
                 PC_dstall = 1;
                 IF_ID_dstall = 1;
                 ID_EXE_dstall = 1;
         end
 
-        // branch decision hazard, beq t1 t2 label, jalr x0 ra imm
-        if (ID_EXE_written_reg != 0 && ((ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2)) && Branch != 2'b00) begin
+        // D branch decision hazard, beq t1 t2 label, jalr x0 ra imm?
+        if (IF_ID_OPcode == 7'b1100011 && (
+                // E is getting rd
+                (ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2) || 
+                // M is getting rd and M is load
+                ((EXE_MEM_written_reg == IF_ID_read_reg1 || EXE_MEM_written_reg == IF_ID_read_reg2) && EXE_MEM_DatatoReg == 2'b01)
+        )) begin 
                 PC_dstall = 1;
                 IF_ID_dstall = 1;
                 ID_EXE_dstall = 1;
-        end 
+        end
 
         // if (EXE_MEM_written_reg != 0 && ((EXE_MEM_written_reg == ID_EXE_read_reg1 || EXE_MEM_written_reg == ID_EXE_read_reg2)) && EXE_MEM_DatatoReg != 2'b00) begin 
         //         PC_dstall = 1;
