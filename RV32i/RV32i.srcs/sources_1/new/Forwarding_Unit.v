@@ -24,6 +24,7 @@ module Forwarding_Unit(
         input [4:0] IF_ID_read_reg1,
         input [4:0] IF_ID_read_reg2,
 
+        input [6:0] ID_EXE_OPcode,
         input [4:0] ID_EXE_read_reg1,
         input [4:0] ID_EXE_read_reg2,
 
@@ -49,7 +50,7 @@ module Forwarding_Unit(
     always @ (*) begin
         // E
         ForwardA = 2'b00;
-        if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg1 && EXE_MEM_DatatoReg == 2'b00) begin
+        if (ID_EXE_OPcode != 7'b1100011 && EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg1 && EXE_MEM_DatatoReg == 2'b00) begin
             // alu
             /*
             for the case:
@@ -60,7 +61,7 @@ module Forwarding_Unit(
             */
             ForwardA = 2'b01; // E/M buffer. alu out -> E's alu_a 
         end 
-        else if (MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg1 && MEM_WB_DatatoReg == 2'b01) begin 
+        else if (ID_EXE_OPcode != 7'b1100011 && MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg1 && MEM_WB_DatatoReg == 2'b01) begin 
             // load: M/W buffer. data_in -> E's alu_a 
             /*
             for the case:
@@ -71,7 +72,7 @@ module Forwarding_Unit(
             */
             ForwardA = 2'b10;
         end 
-        else if (MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg1 && MEM_WB_DatatoReg == 2'b00) begin 
+        else if (ID_EXE_OPcode != 7'b1100011 && MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg1 && MEM_WB_DatatoReg == 2'b00) begin 
             // alu: M/W buffer. alu out -> E's alu_a 
             /*
             for the case:
@@ -84,13 +85,13 @@ module Forwarding_Unit(
         end 
 
         ForwardB = 2'b00;
-        if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg2 && EXE_MEM_DatatoReg == 2'b00) begin
+        if (ID_EXE_OPcode != 7'b1100011 && EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg2 && EXE_MEM_DatatoReg == 2'b00) begin
             ForwardB = 2'b01;
         end 
-        else if (MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg2 && MEM_WB_DatatoReg == 2'b01) begin 
+        else if (ID_EXE_OPcode != 7'b1100011 && MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg2 && MEM_WB_DatatoReg == 2'b01) begin 
             ForwardB = 2'b10;
         end
-        else if (MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg2 && MEM_WB_DatatoReg == 2'b00) begin 
+        else if (ID_EXE_OPcode != 7'b1100011 && MEM_WB_written_reg != 0 && MEM_WB_written_reg == ID_EXE_read_reg2 && MEM_WB_DatatoReg == 2'b00) begin 
             ForwardB = 2'b11;
         end 
 
