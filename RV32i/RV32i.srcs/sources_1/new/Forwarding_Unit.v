@@ -33,15 +33,19 @@ module Forwarding_Unit(
 
     always @ (*) begin
         ForwardA = 2'b00;
-        if (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg1 && ID_EXE_DatatoReg == 2'b00) begin 
-            ForwardA = 2'b01;
+        if (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg1) begin
+            if (ID_EXE_DatatoReg == 2'b00) begin // ALU op
+                ForwardA = 2'b01;
+            end 
         end else if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg1 && ID_EXE_DatatoReg == 2'b01) begin 
             ForwardA = 2'b10;
         end
 
         ForwardB = 2'b00;
-        if (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg2 && ID_EXE_DatatoReg == 2'b00) begin 
-            ForwardB = 2'b01;
+        if (ID_EXE_written_reg != 0 && ID_EXE_written_reg == IF_ID_read_reg2) begin 
+            if (ID_EXE_DatatoReg == 2'b00) begin // ALU op
+                ForwardB = 2'b01;
+            end
         end else if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == IF_ID_read_reg2 && ID_EXE_DatatoReg == 2'b01) begin 
             ForwardB = 2'b10;
         end
