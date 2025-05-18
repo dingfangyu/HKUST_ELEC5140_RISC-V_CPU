@@ -293,7 +293,9 @@ module RV32iPCPU(
     
 
     assign IF_ID_Data_out = rdata_B;
-    ID_Zero_Generator _id_zero_ (.A(ALU_A), .B(ALU_B), .ALU_operation(ALU_Control), .zero(zero));
+
+    // data forwarding
+    ID_Zero_Generator _id_zero_ (.A(ALU_A_fwd), .B(ALU_B_fwd), .ALU_operation(ALU_Control), .zero(zero));
 
     REG_ID_EXE _id_exe_ (
         .clk(clk), .rst(rst), .CE(V5), .ID_EXE_dstall(ID_EXE_dstall),
