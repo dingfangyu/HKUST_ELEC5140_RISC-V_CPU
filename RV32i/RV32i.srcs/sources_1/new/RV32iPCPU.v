@@ -280,7 +280,6 @@ module RV32iPCPU(
         .IF_ID_read_reg2(IF_ID_read_reg2),
 
 
-        .ID_EXE_OPcode(ID_EXE_inst_in[6:0]),
         
         .ID_EXE_written_reg(ID_EXE_written_reg),
         .ID_EXE_read_reg1(ID_EXE_read_reg1),
@@ -402,6 +401,7 @@ module RV32iPCPU(
         .IF_ID_read_reg1(IF_ID_read_reg1),
         .IF_ID_read_reg2(IF_ID_read_reg2),
 
+        .ID_EXE_OPcode(ID_EXE_inst_in[6:0]),
         .ID_EXE_read_reg1(ID_EXE_read_reg1), 
         .ID_EXE_read_reg2(ID_EXE_read_reg2),
 
