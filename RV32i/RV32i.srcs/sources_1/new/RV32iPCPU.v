@@ -112,6 +112,12 @@ module RV32iPCPU(
    wire IF_ID_cstall;
    wire IF_ID_dstall;
    wire ID_EXE_dstall;
+
+   // data forwarding
+    wire [1:0] ForwardA;
+    wire [1:0] ForwardB;
+    wire [31:0] ALU_A_fwd;
+    wire [31:0] ALU_B_fwd;
    
 
         
@@ -256,6 +262,32 @@ module RV32iPCPU(
         .o(ALU_B[31:0]
         ));
 
+
+    Data_Stall _dstall_ (
+        // add forwardA forwardB signals to dstall module
+        .ForwardA(ForwardA),
+        .ForwardB(ForwardB),
+
+        .IF_ID_written_reg(IF_ID_written_reg),
+        .IF_ID_read_reg1(IF_ID_read_reg1),
+        .IF_ID_read_reg2(IF_ID_read_reg2),
+        
+        .ID_EXE_written_reg(ID_EXE_written_reg),
+        .ID_EXE_read_reg1(ID_EXE_read_reg1),
+        .ID_EXE_read_reg2(ID_EXE_read_reg2),
+        
+        .EXE_MEM_written_reg(EXE_MEM_written_reg),
+        .EXE_MEM_read_reg1(EXE_MEM_read_reg1),
+        .EXE_MEM_read_reg2(EXE_MEM_read_reg2),
+
+        .MEM_WB_written_reg(MEM_WB_written_reg),
+
+        .ID_EXE_DatatoReg(ID_EXE_DatatoReg),
+
+        .PC_dstall(PC_dstall),
+        .IF_ID_dstall(IF_ID_dstall),
+        .ID_EXE_dstall(ID_EXE_dstall)
+        );
     
 
     assign IF_ID_Data_out = rdata_B;
@@ -326,9 +358,7 @@ module RV32iPCPU(
     // Out:
     //   None
 
-
-    wire [1:0] ForwardA;
-    wire [1:0] ForwardB;
+    // Forwarding unit, forward A B signals generation
     Forwarding_Unit _forwarding_unit_(
         // input
         //// For Data Hazard
@@ -347,9 +377,7 @@ module RV32iPCPU(
         .ForwardB(ForwardB)
     );
 
-    // data forwarding
-    wire [31:0] ALU_A_fwd;
-    wire [31:0] ALU_B_fwd;
+    // data forwarding, ALU A & B Muxes in E stage
     Mux4to1b32  _rA_fwd_ (
         .I0(ID_EXE_ALU_A[31:0]),
         .I1(EXE_MEM_ALU_out[31:0]), 
@@ -378,31 +406,6 @@ module RV32iPCPU(
         .zero()
         ); 
     
-    Data_Stall _dstall_ (
-        // add forwardA forwardB signals to dstall module
-        .ForwardA(ForwardA),
-        .ForwardB(ForwardB),
-
-        .IF_ID_written_reg(IF_ID_written_reg),
-        .IF_ID_read_reg1(IF_ID_read_reg1),
-        .IF_ID_read_reg2(IF_ID_read_reg2),
-        
-        .ID_EXE_written_reg(ID_EXE_written_reg),
-        .ID_EXE_read_reg1(ID_EXE_read_reg1),
-        .ID_EXE_read_reg2(ID_EXE_read_reg2),
-        
-        .EXE_MEM_written_reg(EXE_MEM_written_reg),
-        .EXE_MEM_read_reg1(EXE_MEM_read_reg1),
-        .EXE_MEM_read_reg2(EXE_MEM_read_reg2),
-
-        .MEM_WB_written_reg(MEM_WB_written_reg),
-
-        .ID_EXE_DatatoReg(ID_EXE_DatatoReg),
-                
-        .PC_dstall(PC_dstall),
-        .IF_ID_dstall(IF_ID_dstall),
-        .ID_EXE_dstall(ID_EXE_dstall)
-        );
 
 
     REG_EXE_MEM _exe_mem_ (
