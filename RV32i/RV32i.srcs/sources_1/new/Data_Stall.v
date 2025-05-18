@@ -38,6 +38,8 @@ module Data_Stall(
         input [1:0] ID_EXE_DatatoReg,
         input [1:0] Branch,
 
+        input [1:0] EXE_MEM_DatatoReg,
+
         input [4:0] MEM_WB_written_reg,
         
         output reg PC_dstall,

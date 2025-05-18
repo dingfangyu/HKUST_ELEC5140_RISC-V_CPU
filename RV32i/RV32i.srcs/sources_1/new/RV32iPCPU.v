@@ -274,7 +274,7 @@ module RV32iPCPU(
         .ForwardB(ForwardB),
 
         .IF_ID_OPcode(IF_ID_inst_in[6:0]),
-        
+
         .IF_ID_written_reg(IF_ID_written_reg),
         .IF_ID_read_reg1(IF_ID_read_reg1),
         .IF_ID_read_reg2(IF_ID_read_reg2),
@@ -290,6 +290,7 @@ module RV32iPCPU(
         .MEM_WB_written_reg(MEM_WB_written_reg),
 
         .ID_EXE_DatatoReg(ID_EXE_DatatoReg),
+        .EXE_MEM_DatatoReg(EXE_MEM_DatatoReg),
 
         .Branch(Branch),
 
