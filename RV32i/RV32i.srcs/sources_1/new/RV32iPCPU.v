@@ -381,7 +381,7 @@ module RV32iPCPU(
     Mux4to1b32  _rA_fwd_ (
         .I0(ID_EXE_ALU_A[31:0]),
         .I1(EXE_MEM_ALU_out[31:0]), 
-        .I2(MEM_WB_data_in[31:0]), 
+        .I2(MEM_WB_Data_in[31:0]), 
         .I3(),
         .s(ForwardA[1:0]),
         .o(ALU_A_fwd[31:0]
@@ -390,7 +390,7 @@ module RV32iPCPU(
     Mux4to1b32  _rB_fwd_ (
         .I0(ID_EXE_ALU_B[31:0]),
         .I1(EXE_MEM_ALU_out[31:0]), 
-        .I2(MEM_WB_data_in[31:0]),  // MEM_WB_data_in
+        .I2(MEM_WB_Data_in[31:0]),  // MEM_WB_data_in
         .I3(),
         .s(ForwardB[1:0]),
         .o(ALU_B_fwd[31:0]
@@ -411,7 +411,7 @@ module RV32iPCPU(
     Mux4to1b32  _data_out_fwd_ (
         .I0(ID_EXE_Data_out[31:0]),
         .I1(EXE_MEM_ALU_out[31:0]), 
-        .I2(MEM_WB_data_in[31:0]),  // MEM_WB_data_in
+        .I2(MEM_WB_Data_in[31:0]),  // MEM_WB_data_in
         .I3(),
         .s(ForwardB[1:0]),
         .o(ID_EXE_Data_out_fwd[31:0]
