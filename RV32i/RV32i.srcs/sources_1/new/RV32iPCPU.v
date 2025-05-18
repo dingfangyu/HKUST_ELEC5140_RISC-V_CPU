@@ -377,7 +377,7 @@ module RV32iPCPU(
         .ForwardB(ForwardB)
     );
 
-    // data forwarding, ALU A & B Muxes in E stage
+    // data forwarding, for ALU A & B 
     Mux4to1b32  _rA_fwd_ (
         .I0(ID_EXE_ALU_A[31:0]),
         .I1(EXE_MEM_ALU_out[31:0]), 
@@ -405,7 +405,17 @@ module RV32iPCPU(
         .overflow(),
         .zero()
         ); 
-    
+
+    wire [31:0] ID_EXE_Data_out_fwd;
+    // data forwarding, for ID_EXE_Data_out of sw, the data is rs2 which should use ForwardB
+    Mux4to1b32  _data_out_fwd_ (
+        .I0(ID_EXE_Data_out[31:0]),
+        .I1(EXE_MEM_ALU_out[31:0]), 
+        .I2(Wt_data[31:0]),  // MEM_WB_data_in
+        .I3(),
+        .s(ForwardB[1:0]),
+        .o(ID_EXE_Data_out_fwd[31:0]
+        ));
 
 
     REG_EXE_MEM _exe_mem_ (
@@ -415,7 +425,7 @@ module RV32iPCPU(
         .PC(ID_EXE_PC),
         //// To MEM stage
         .ALU_out(ID_EXE_ALU_out),
-        .Data_out(ID_EXE_Data_out),
+        .Data_out(ID_EXE_Data_out_fwd), // here also fwd, for sw
         .mem_w(ID_EXE_mem_w),
         //// To WB stage
         .DatatoReg(ID_EXE_DatatoReg),

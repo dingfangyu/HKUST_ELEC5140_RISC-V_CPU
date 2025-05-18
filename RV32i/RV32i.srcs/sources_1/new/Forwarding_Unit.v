@@ -38,7 +38,6 @@ module Forwarding_Unit(
 
     always @ (*) begin
         ForwardA = 2'b00;
-
         if (EXE_MEM_written_reg != 0 && EXE_MEM_written_reg == ID_EXE_read_reg1 && EXE_MEM_DatatoReg == 2'b00) begin
             ForwardA = 2'b01; // E/M buffer -> E's alu_a alu_b
         end 
