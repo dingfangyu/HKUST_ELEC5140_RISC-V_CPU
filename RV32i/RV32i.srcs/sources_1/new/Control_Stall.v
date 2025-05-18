@@ -31,15 +31,9 @@ module Control_Stall(
     always @ (*) begin
         IF_ID_cstall = 1'b0;
 
-                PC_dstall = 0;
-                IF_ID_dstall = 0;
-                // ID_EXE_dstall = 1;
         if (Branch[1:0] != 2'b00) begin
             IF_ID_cstall = 1'b1;
 
-                PC_dstall = 1;
-                IF_ID_dstall = 1;
-                // ID_EXE_dstall = 1;
         end
     end
 endmodule
