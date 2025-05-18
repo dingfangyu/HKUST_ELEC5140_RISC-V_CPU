@@ -284,6 +284,8 @@ module RV32iPCPU(
 
         .ID_EXE_DatatoReg(ID_EXE_DatatoReg),
 
+        .Branch(Branch),
+
         .PC_dstall(PC_dstall),
         .IF_ID_dstall(IF_ID_dstall),
         .ID_EXE_dstall(ID_EXE_dstall)

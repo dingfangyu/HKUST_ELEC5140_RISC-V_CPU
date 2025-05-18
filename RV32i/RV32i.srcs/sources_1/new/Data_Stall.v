@@ -35,6 +35,7 @@ module Data_Stall(
         input [4:0] EXE_MEM_read_reg2,
 
         input [1:0] ID_EXE_DatatoReg,
+        input [1:0] Branch,
 
         input [4:0] MEM_WB_written_reg,
         
@@ -47,7 +48,7 @@ module Data_Stall(
         PC_dstall = 0;
         IF_ID_dstall = 0;
         ID_EXE_dstall = 0;
-        if (ID_EXE_written_reg != 0 && ((ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2)) && ID_EXE_DatatoReg == 2'b01) begin 
+        if (ID_EXE_written_reg != 0 && ((ID_EXE_written_reg == IF_ID_read_reg1 || ID_EXE_written_reg == IF_ID_read_reg2)) && (ID_EXE_DatatoReg == 2'b01 || Branch != 2'b00)) begin 
                 PC_dstall = 1;
                 IF_ID_dstall = 1;
                 ID_EXE_dstall = 1;
