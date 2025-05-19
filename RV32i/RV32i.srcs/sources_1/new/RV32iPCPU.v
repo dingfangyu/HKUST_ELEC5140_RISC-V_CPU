@@ -297,16 +297,16 @@ module RV32iPCPU(
 
     assign IF_ID_Data_out = rdata_B;
 
-    wire [31:0] IF_ID_Data_out_fwd;
+    // wire [31:0] IF_ID_Data_out_fwd;
     // data forwarding, for IF_ID_Data_out of sw, the data is rs2 which should use ForwardB_D
-    Mux4to1b32  _data_out_fwd_D_ (
-        .I0(IF_ID_Data_out[31:0]),
-        .I1(EXE_MEM_ALU_out[31:0]), 
-        .I2(MEM_WB_Data_in[31:0]),  // MEM_WB_data_in
-        .I3(MEM_WB_ALU_out[31:0]),
-        .s(ForwardB_D[1:0]),
-        .o(IF_ID_Data_out_fwd[31:0]
-        ));
+    // Mux4to1b32  _data_out_fwd_D_ (
+    //     .I0(IF_ID_Data_out[31:0]),
+    //     .I1(EXE_MEM_ALU_out[31:0]), 
+    //     .I2(MEM_WB_Data_in[31:0]),  // MEM_WB_data_in
+    //     .I3(MEM_WB_ALU_out[31:0]),
+    //     .s(ForwardB_D[1:0]),
+    //     .o(IF_ID_Data_out_fwd[31:0]
+    //     ));
 
 
     // D alu data forwarding
@@ -343,7 +343,7 @@ module RV32iPCPU(
         //// To EXE stage, ALU operation control signal
         .ALU_Control(ALU_Control),
         //// To MEM stage, for sw instruction, data from rs2 register written into memory
-        .Data_out(IF_ID_Data_out_fwd), // !!!
+        .Data_out(IF_ID_Data_out), // !!!
         //// To MEM stage, for sw instruction, memor write enable signal
         .mem_w(IF_ID_mem_w),
         //// To WB stage, for choosing different data written back to register file

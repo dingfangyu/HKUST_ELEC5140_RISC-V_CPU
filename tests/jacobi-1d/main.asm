@@ -88,7 +88,3 @@ srli t0, t0, 9 // t0 = 146744 >> 9 = 286 = 0x11e
 addi t0, t0, -285
 sw t0, 0(x0)
 
-
-// 4. set memory[0] to 1, which means finished
-addi t1, x0, 1
-sw t1, 0(x0)
