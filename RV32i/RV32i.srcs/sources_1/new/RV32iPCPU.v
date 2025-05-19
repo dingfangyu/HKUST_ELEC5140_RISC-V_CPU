@@ -116,6 +116,8 @@ module RV32iPCPU(
    // data forwarding
     wire [1:0] ForwardA_D;
     wire [1:0] ForwardB_D;
+    wire [31:0] rdata_A_fwd;
+    wire [31:0] rdata_B_fwd;
     wire [31:0] ALU_A_fwd_D;
     wire [31:0] ALU_B_fwd_D;
 
@@ -239,35 +241,7 @@ module RV32iPCPU(
         .sign(sign)                     // not used yet
         );
 
-    Regs U2 (.clk(clk),
-             .rst(rst),
-             .L_S(MEM_WB_RegWrite),             // From Write-Back stage
-             .R_addr_A(IF_ID_inst_in[19:15]),   // ID
-             .R_addr_B(IF_ID_inst_in[24:20]),   // ID
-             .Wt_addr(Wt_addr[4:0]),            // From Write-Back stage
-             .Wt_data(Wt_data[31:0]),           // From Write-Back stage
-             .rdata_A(rdata_A[31:0]),
-             .rdata_B(rdata_B[31:0])
-             );
-    SignExt _signed_ext_ (.inst_in(IF_ID_inst_in), .imm_32(Imm_32));
-
-    Mux2to1b32  _alu_source_A_ (
-        .I0(rdata_A[31:0]),
-        .I1(Imm_32[31:0]),   // not used 
-        .s(ALUSrc_A),
-        .o(ALU_A[31:0])
-        );
-
-    Mux4to1b32  _alu_source_B_ (
-        .I0(rdata_B[31:0]),
-        .I1(Imm_32[31:0]),
-        .I2(),
-        .I3(),
-        .s(ALUSrc_B[1:0]),
-        .o(ALU_B[31:0]
-        ));
-
-    // fwd
+    // dstall with fwd
     Data_Stall _dstall_ (
 
         .IF_ID_OPcode(IF_ID_inst_in[6:0]),
@@ -294,39 +268,54 @@ module RV32iPCPU(
         .ID_EXE_dstall(ID_EXE_dstall)
         );
     
+    Regs U2 (.clk(clk),
+             .rst(rst),
+             .L_S(MEM_WB_RegWrite),             // From Write-Back stage
+             .R_addr_A(IF_ID_inst_in[19:15]),   // ID
+             .R_addr_B(IF_ID_inst_in[24:20]),   // ID
+             .Wt_addr(Wt_addr[4:0]),            // From Write-Back stage
+             .Wt_data(Wt_data[31:0]),           // From Write-Back stage
+             .rdata_A(rdata_A[31:0]),
+             .rdata_B(rdata_B[31:0])
+             );
+    SignExt _signed_ext_ (.inst_in(IF_ID_inst_in), .imm_32(Imm_32));
 
-    assign IF_ID_Data_out = rdata_B;
-
-    // wire [31:0] IF_ID_Data_out_fwd;
-    // data forwarding, for IF_ID_Data_out of sw, the data is rs2 which should use ForwardB_D
-    // Mux4to1b32  _data_out_fwd_D_ (
-    //     .I0(IF_ID_Data_out[31:0]),
-    //     .I1(EXE_MEM_ALU_out[31:0]), 
-    //     .I2(MEM_WB_Data_in[31:0]),  // MEM_WB_data_in
-    //     .I3(MEM_WB_ALU_out[31:0]),
-    //     .s(ForwardB_D[1:0]),
-    //     .o(IF_ID_Data_out_fwd[31:0]
-    //     ));
-
-
-    // D alu data forwarding
-    Mux4to1b32  _rA_fwd_D_ (
-        .I0(ALU_A[31:0]),
+    // fwd: rdata_A, rdata_B, for branch
+    Mux4to1b32  _rdata_A_fwd_ (
+        .I0(rdata_A[31:0]),
         .I1(EXE_MEM_ALU_out[31:0]), 
         .I2(MEM_WB_Data_in[31:0]), 
         .I3(MEM_WB_ALU_out[31:0]),
         .s(ForwardA_D[1:0]),
-        .o(ALU_A_fwd_D[31:0]
+        .o(rdata_A_fwd[31:0]
         ));
 
-    Mux4to1b32  _rB_fwd_D_ (
-        .I0(ALU_B[31:0]),
+    Mux4to1b32  _rdata_B_fwd_ (
+        .I0(rdata_B[31:0]),
         .I1(EXE_MEM_ALU_out[31:0]), 
         .I2(MEM_WB_Data_in[31:0]),  // MEM_WB_data_in
         .I3(MEM_WB_ALU_out[31:0]),
         .s(ForwardB_D[1:0]),
-        .o(ALU_B_fwd_D[31:0]
+        .o(rdata_B_fwd[31:0]
         )); 
+
+    Mux2to1b32  _alu_source_A_ (
+        .I0(rdata_A_fwd[31:0]),
+        .I1(Imm_32[31:0]),   // not used 
+        .s(ALUSrc_A),
+        .o(ALU_A[31:0])
+        );
+
+    Mux4to1b32  _alu_source_B_ (
+        .I0(rdata_B_fwd[31:0]),
+        .I1(Imm_32[31:0]),
+        .I2(),
+        .I3(),
+        .s(ALUSrc_B[1:0]),
+        .o(ALU_B[31:0]
+        ));
+
+    assign IF_ID_Data_out = rdata_B;
 
     ID_Zero_Generator _id_zero_ (.A(ALU_A_fwd_D), .B(ALU_B_fwd_D), .ALU_operation(ALU_Control), .zero(zero));
 
