@@ -74,6 +74,7 @@ module REG_ID_EXE(
             ID_EXE_written_reg  <= 5'b00000;
             ID_EXE_read_reg1    <= 5'b00000;
             ID_EXE_read_reg2    <= 5'b00000;
+            ID_EXE_ALUSrc_B <= 2'b00;
         end
         else if (CE) begin
             ID_EXE_inst_in      <= inst_in;
@@ -89,6 +90,7 @@ module REG_ID_EXE(
             ID_EXE_written_reg  <= written_reg;
             ID_EXE_read_reg1    <= read_reg1;
             ID_EXE_read_reg2    <= read_reg2;
+            ID_EXE_ALUSrc_B <= ALUSrc_B;
         end
     end   
 endmodule
