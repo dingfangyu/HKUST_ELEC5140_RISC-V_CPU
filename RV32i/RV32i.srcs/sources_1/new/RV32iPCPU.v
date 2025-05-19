@@ -315,7 +315,7 @@ module RV32iPCPU(
         .o(ALU_B[31:0]
         ));
 
-    assign IF_ID_Data_out = rdata_B;
+    assign IF_ID_Data_out = rdata_B_fwd;
 
     ID_Zero_Generator _id_zero_ (.A(ALU_A_fwd_D), .B(ALU_B_fwd_D), .ALU_operation(ALU_Control), .zero(zero));
 
