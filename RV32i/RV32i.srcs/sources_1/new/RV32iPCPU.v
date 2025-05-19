@@ -438,22 +438,35 @@ module RV32iPCPU(
     //     .o(ALU_B_fwd[31:0]
     //     ));
 
-    always @ (*) begin
-        if (ID_EXE_ALUSrc_B == 2'b00) begin
-            // reg2 == ALU B
-            case(ForwardB)
-                2'b00: ALU_B_fwd = ID_EXE_ALU_B;
-                2'b01: ALU_B_fwd = EXE_MEM_ALU_out;
-                2'b10: ALU_B_fwd = MEM_WB_Data_in;
-                2'b11: ALU_B_fwd = MEM_WB_ALU_out;
-                default: ALU_B_fwd = ID_EXE_ALU_B;
-            endcase
-        end 
-        else begin
-            // ALU B is not reg2
-            ALU_B_fwd = ID_EXE_ALU_B;
-        end 
-    end 
+    ALU_B_Fwd _ALU_B_fwd_(
+        .ID_EXE_ALUSrc_B(ID_EXE_ALUSrc_B),
+        .ForwardB(ForwardB),
+        
+        .ID_EXE_ALU_B(ID_EXE_ALU_B),
+        .EXE_MEM_ALU_out(EXE_MEM_ALU_out),
+        .MEM_WB_Data_in(MEM_WB_Data_in),
+        .MEM_WB_ALU_out(MEM_WB_ALU_out),
+
+        .ALU_B_fwd(ALU_B_fwd)
+
+    );
+
+    // always @ (*) begin
+    //     if (ID_EXE_ALUSrc_B == 2'b00) begin
+    //         // reg2 == ALU B
+    //         case(ForwardB)
+    //             2'b00: ALU_B_fwd = ID_EXE_ALU_B;
+    //             2'b01: ALU_B_fwd = EXE_MEM_ALU_out;
+    //             2'b10: ALU_B_fwd = MEM_WB_Data_in;
+    //             2'b11: ALU_B_fwd = MEM_WB_ALU_out;
+    //             default: ALU_B_fwd = ID_EXE_ALU_B;
+    //         endcase
+    //     end 
+    //     else begin
+    //         // ALU B is not reg2
+    //         ALU_B_fwd = ID_EXE_ALU_B;
+    //     end 
+    // end 
     
 // EM alu out -> DE alu out -> alu A B -> buffers, alu A B sources
     ALU _alualu_ (
