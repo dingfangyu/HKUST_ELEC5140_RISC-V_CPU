@@ -122,7 +122,7 @@ module RV32iPCPU(
     wire [1:0] ForwardA;
     wire [1:0] ForwardB;
     wire [31:0] ALU_A_fwd;
-    wire [31:0] ALU_B_fwd;
+    reg [31:0] ALU_B_fwd; // TODO: wire
    
 
         
@@ -461,6 +461,7 @@ module RV32iPCPU(
             endcase
         end 
         else begin
+            // ALU B is not reg2
             ALU_B_fwd = ID_EXE_ALU_B;
         end 
     end 
