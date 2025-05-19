@@ -29,7 +29,7 @@ module ALU_B_Fwd(
     input [31:0] MEM_WB_Data_in,
     input [31:0] MEM_WB_ALU_out,
 
-    output reg [31:0] ALU_B_fwd,
+    output reg [31:0] ALU_B_fwd
     );
 
     always @ (*) begin
