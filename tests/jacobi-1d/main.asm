@@ -72,7 +72,7 @@ addi t4, s3, 0 // addr of B
 init_loop_i:
 addi t1, t0, 2 // data for A[i]
 sw t1, 0(t3) // A[i] = i + 2
-addi t1, t1, 2 // data for B[i]
+addi t1, t1, 1 // data for B[i]
 sw t1, 0(t4) // B[i] = i + 3
 addi t3, t3, 4
 addi t4, t4, 4

@@ -336,8 +336,8 @@ module RV32iPCPU(
         .inst_in(IF_ID_inst_in),
         .PC(IF_ID_PC),
         //// To EXE stage, ALU Operands A & B
-        .ALU_A(ALU_A),
-        .ALU_B(ALU_B),
+        .ALU_A(ALU_A_fwd_D),
+        .ALU_B(ALU_B_fwd_D), // ???
         //// To EXE stage, ALU operation control signal
         .ALU_Control(ALU_Control),
         //// To MEM stage, for sw instruction, data from rs2 register written into memory
@@ -442,7 +442,7 @@ module RV32iPCPU(
         .o(ALU_B_fwd[31:0]
         ));
     
-
+// EM alu out -> DE alu out -> alu A B -> buffers, DE alu A B
     ALU _alualu_ (
         .A(ALU_A_fwd[31:0]),
         .B(ALU_B_fwd[31:0]),
