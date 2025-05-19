@@ -317,7 +317,7 @@ module RV32iPCPU(
 
     assign IF_ID_Data_out = rdata_B_fwd;
 
-    ID_Zero_Generator _id_zero_ (.A(ALU_A_fwd_D), .B(ALU_B_fwd_D), .ALU_operation(ALU_Control), .zero(zero));
+    ID_Zero_Generator _id_zero_ (.A(ALU_A), .B(ALU_B), .ALU_operation(ALU_Control), .zero(zero));
 
     // fwd
     wire [1:0] ID_EXE_ALUSrc_B;
@@ -327,8 +327,8 @@ module RV32iPCPU(
         .inst_in(IF_ID_inst_in),
         .PC(IF_ID_PC),
         //// To EXE stage, ALU Operands A & B
-        .ALU_A(ALU_A_fwd_D),
-        .ALU_B(ALU_B_fwd_D), // ???
+        .ALU_A(ALU_A),
+        .ALU_B(ALU_B), // ???
         //// To EXE stage, ALU operation control signal
         .ALU_Control(ALU_Control),
         //// To MEM stage, for sw instruction, data from rs2 register written into memory
