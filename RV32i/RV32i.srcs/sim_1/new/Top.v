@@ -68,7 +68,8 @@ module Top;
         
     initial begin
         // Initialize Inst ROM and Data RAM
-        $readmemh("ROM_data.txt", Inst_ROM);    // Please find this file in `....../[RV32i directory]/RV32i.sim/sim_1/behav/xsim/ROM_data.txt`
+        
+        $readmemh("ROM_data.txt", Inst_ROM); //?   // Please find this file in `....../[RV32i directory]/RV32i.sim/sim_1/behav/xsim/ROM_data.txt`
                                                    // When using "Assembler", you can get the hex numbers at the right-hand side text box
         for (i = 0; i < 16384; i = i + 1) begin
             Data_RAM[i] = 32'h0;

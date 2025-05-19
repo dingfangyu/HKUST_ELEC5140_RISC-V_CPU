@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<GenRun Id="impl_1" LaunchPart="xc7a100tcsg324-1" LaunchTime="1747610735">
+  <File Type="ROUTE-PWR" Name="RV32iPCPU_power_routed.rpt"/>
+  <File Type="PA-TCL" Name="RV32iPCPU.tcl"/>
+  <File Type="ROUTE-PWR-SUM" Name="RV32iPCPU_power_summary_routed.pb"/>
+  <File Type="REPORTS-TCL" Name="RV32iPCPU_reports.tcl"/>
+  <File Type="BITSTR-MSK" Name="RV32iPCPU.msk"/>
+  <File Type="ROUTE-CLK" Name="RV32iPCPU_clock_utilization_routed.rpt"/>
+  <File Type="RDI-RDI" Name="RV32iPCPU.vdi"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-PB" Name="RV32iPCPU_bus_skew_postroute_physopted.pb"/>
+  <File Type="BG-BIT" Name="RV32iPCPU.bit"/>
+  <File Type="BG-DRC" Name="RV32iPCPU.drc"/>
+  <File Type="BG-BGN" Name="RV32iPCPU.bgn"/>
+  <File Type="BG-BIN" Name="RV32iPCPU.bin"/>
+  <File Type="BITSTR-RBT" Name="RV32iPCPU.rbt"/>
+  <File Type="BITSTR-NKY" Name="RV32iPCPU.nky"/>
+  <File Type="BITSTR-BMM" Name="RV32iPCPU_bd.bmm"/>
+  <File Type="BITSTR-MMI" Name="RV32iPCPU.mmi"/>
+  <File Type="ROUTE-METHODOLOGY-DRC" Name="RV32iPCPU_methodology_drc_routed.rpt"/>
+  <File Type="BITSTR-SYSDEF" Name="RV32iPCPU.sysdef"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-PB" Name="RV32iPCPU_methodology_drc_routed.pb"/>
+  <File Type="BITSTR-LTX" Name="debug_nets.ltx"/>
+  <File Type="BITSTR-LTX" Name="RV32iPCPU.ltx"/>
+  <File Type="BOOT-PDI-FILE" Name="RV32iPCPU_soc.pdi"/>
+  <File Type="WBT-USG" Name="usage_statistics_webtalk.html"/>
+  <File Type="NPI_FILE" Name="RV32iPCPU.npi"/>
+  <File Type="OPT-DRC" Name="RV32iPCPU_drc_opted.rpt"/>
+  <File Type="RBD_FILE" Name="RV32iPCPU.rbd"/>
+  <File Type="OPT-HWDEF" Name="RV32iPCPU.hwdef"/>
+  <File Type="PLACE-IO" Name="RV32iPCPU_io_placed.rpt"/>
+  <File Type="PLACE-UTIL" Name="RV32iPCPU_utilization_placed.rpt"/>
+  <File Type="PLACE-UTIL-PB" Name="RV32iPCPU_utilization_placed.pb"/>
+  <File Type="PLACE-CTRL" Name="RV32iPCPU_control_sets_placed.rpt"/>
+  <File Type="PLACE-PRE-SIMILARITY" Name="RV32iPCPU_incremental_reuse_pre_placed.rpt"/>
+  <File Type="ROUTE-DRC" Name="RV32iPCPU_drc_routed.rpt"/>
+  <File Type="ROUTE-DRC-PB" Name="RV32iPCPU_drc_routed.pb"/>
+  <File Type="ROUTE-PWR-RPX" Name="RV32iPCPU_power_routed.rpx"/>
+  <File Type="ROUTE-STATUS" Name="RV32iPCPU_route_status.rpt"/>
+  <File Type="ROUTE-STATUS-PB" Name="RV32iPCPU_route_status.pb"/>
+  <File Type="ROUTE-DCP" Name="RV32iPCPU_routed.dcp"/>
+  <File Type="ROUTE-ERROR-DCP" Name="RV32iPCPU_routed_error.dcp"/>
+  <File Type="ROUTE-BLACKBOX-DCP" Name="RV32iPCPU_routed_bb.dcp"/>
+  <File Type="ROUTE-TIMINGSUMMARY" Name="RV32iPCPU_timing_summary_routed.rpt"/>
+  <File Type="ROUTE-TIMING-PB" Name="RV32iPCPU_timing_summary_routed.pb"/>
+  <File Type="ROUTE-TIMING-RPX" Name="RV32iPCPU_timing_summary_routed.rpx"/>
+  <File Type="ROUTE-SIMILARITY" Name="RV32iPCPU_incremental_reuse_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW" Name="RV32iPCPU_bus_skew_routed.rpt"/>
+  <File Type="ROUTE-BUS-SKEW-PB" Name="RV32iPCPU_bus_skew_routed.pb"/>
+  <File Type="ROUTE-BUS-SKEW-RPX" Name="RV32iPCPU_bus_skew_routed.rpx"/>
+  <File Type="OPT-DCP" Name="RV32iPCPU_opt.dcp"/>
+  <File Type="PLACE-DCP" Name="RV32iPCPU_placed.dcp"/>
+  <File Type="PWROPT-DCP" Name="RV32iPCPU_pwropt.dcp"/>
+  <File Type="POSTPLACE-PWROPT-DCP" Name="RV32iPCPU_postplace_pwropt.dcp"/>
+  <File Type="PHYSOPT-DCP" Name="RV32iPCPU_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-DCP" Name="RV32iPCPU_postroute_physopt.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-BLACKBOX-DCP" Name="RV32iPCPU_postroute_physopt_bb.dcp"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING" Name="RV32iPCPU_timing_summary_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-PB" Name="RV32iPCPU_timing_summary_postroute_physopted.pb"/>
+  <File Type="POSTROUTE-PHYSOPT-TIMING-RPX" Name="RV32iPCPU_timing_summary_postroute_physopted.rpx"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW" Name="RV32iPCPU_bus_skew_postroute_physopted.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-BUS-SKEW-RPX" Name="RV32iPCPU_bus_skew_postroute_physopted.rpx"/>
+  <File Type="ROUTE-DRC-RPX" Name="RV32iPCPU_drc_routed.rpx"/>
+  <File Type="ROUTE-METHODOLOGY-DRC-RPX" Name="RV32iPCPU_methodology_drc_routed.rpx"/>
+  <File Type="PDI-FILE" Name="RV32iPCPU.pdi"/>
+  <File Type="PL-PDI-FILE" Name="RV32iPCPU_pld.pdi"/>
+  <File Type="RCFI_FILE" Name="RV32iPCPU.rcfi"/>
+  <File Type="CFI_FILE" Name="RV32iPCPU.cfi"/>
+  <File Type="RNPI_FILE" Name="RV32iPCPU.rnpi"/>
+  <File Type="ROUTE-RQS" Name="RV32iPCPU_routed.rqs"/>
+  <File Type="POSTROUTE-PHYSOPT-RQS" Name="RV32iPCPU_postroute_physopted.rqs"/>
+  <File Type="ROUTE-RQS-RPT" Name="route_report_qor_suggestions_0.rpt"/>
+  <File Type="POSTROUTE-PHYSOPT-RQS-RPT" Name="postroute_physopt_report_qor_suggestions_0.rpt"/>
+  <FileSet Name="sources" Type="DesignSrcs" RelSrcDir="$PSRCDIR/sources_1" RelGenDir="$PGENDIR/sources_1">
+    <Filter Type="Srcs"/>
+    <File Path="$PSRCDIR/sources_1/new/ALU.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Control_Stall.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Controler.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Data_Stall.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Forwarding_Unit.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Get_rw_regs.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/ID_Zero_Generator.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/LUI_or_AUIPC.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Mux2to1b32.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Mux4to1b32.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/REG32.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/REG_EXE_MEM.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/REG_ID_EXE.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/REG_IF_ID.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/REG_MEM_WB.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/Regs.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/SignExt.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/add_32.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <File Path="$PSRCDIR/sources_1/new/RV32iPCPU.v">
+      <FileInfo>
+        <Attr Name="UsedIn" Val="synthesis"/>
+        <Attr Name="UsedIn" Val="implementation"/>
+        <Attr Name="UsedIn" Val="simulation"/>
+      </FileInfo>
+    </File>
+    <Config>
+      <Option Name="DesignMode" Val="RTL"/>
+      <Option Name="TopModule" Val="RV32iPCPU"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="constrs_in" Type="Constrs" RelSrcDir="$PSRCDIR/constrs_1" RelGenDir="$PGENDIR/constrs_1">
+    <Filter Type="Constrs"/>
+    <Config>
+      <Option Name="ConstrsType" Val="XDC"/>
+    </Config>
+  </FileSet>
+  <FileSet Name="utils" Type="Utils" RelSrcDir="$PSRCDIR/utils_1" RelGenDir="$PGENDIR/utils_1">
+    <Filter Type="Utils"/>
+    <Config>
+      <Option Name="TopAutoSet" Val="TRUE"/>
+    </Config>
+  </FileSet>
+  <Strategy Version="1" Minor="2">
+    <StratHandle Name="Vivado Implementation Defaults" Flow="Vivado Implementation 2020"/>
+    <Step Id="init_design"/>
+    <Step Id="opt_design"/>
+    <Step Id="power_opt_design"/>
+    <Step Id="place_design"/>
+    <Step Id="post_place_power_opt_design"/>
+    <Step Id="phys_opt_design"/>
+    <Step Id="route_design"/>
+    <Step Id="post_route_phys_opt_design"/>
+    <Step Id="write_bitstream"/>
+    <Step Id="write_device_image"/>
+  </Strategy>
+</GenRun>
