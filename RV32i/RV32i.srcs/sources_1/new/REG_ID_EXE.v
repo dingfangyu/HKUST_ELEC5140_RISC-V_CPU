@@ -39,6 +39,8 @@ module REG_ID_EXE(
         input [4:0] written_reg,
         input [4:0] read_reg1,
         input [4:0] read_reg2,
+
+        input [1:0] ALUSrc_B,
         
         output reg [31:0] ID_EXE_inst_in,
         output reg [31:0] ID_EXE_PC = 0,
@@ -49,6 +51,8 @@ module REG_ID_EXE(
         output reg ID_EXE_mem_w,
         output reg [1:0] ID_EXE_DatatoReg,
         output reg ID_EXE_RegWrite,
+
+        output reg [1:0] ID_EXE_ALUSrc_B,
         
         output reg [4:0] ID_EXE_written_reg,
         output reg [4:0] ID_EXE_read_reg1,

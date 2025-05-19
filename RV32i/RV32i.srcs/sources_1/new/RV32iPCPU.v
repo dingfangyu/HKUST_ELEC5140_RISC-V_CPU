@@ -330,6 +330,8 @@ module RV32iPCPU(
 
     ID_Zero_Generator _id_zero_ (.A(ALU_A_fwd_D), .B(ALU_B_fwd_D), .ALU_operation(ALU_Control), .zero(zero));
 
+    // fwd
+    wire [1:0] ID_EXE_ALUSrc_B;
     REG_ID_EXE _id_exe_ (
         .clk(clk), .rst(rst), .CE(V5), .ID_EXE_dstall(ID_EXE_dstall),
         // Input
@@ -350,6 +352,10 @@ module RV32iPCPU(
         .RegWrite(RegWrite),
         //// For Data Hazard
         .written_reg(IF_ID_written_reg), .read_reg1(IF_ID_read_reg1), .read_reg2(IF_ID_read_reg2),
+
+        // fwd
+        .ALUSrc_B(ALUSrc_B),
+        .ID_EXE_ALUSrc_B(ID_EXE_ALUSrc_B),
         
         // Output
         .ID_EXE_inst_in(ID_EXE_inst_in),
@@ -433,16 +439,33 @@ module RV32iPCPU(
         .o(ALU_A_fwd[31:0]
         ));
 
-    Mux4to1b32  _rB_fwd_ (
-        .I0(ID_EXE_ALU_B[31:0]),
-        .I1(EXE_MEM_ALU_out[31:0]), 
-        .I2(MEM_WB_Data_in[31:0]),  // MEM_WB_data_in
-        .I3(MEM_WB_ALU_out[31:0]),
-        .s(ForwardB[1:0]),
-        .o(ALU_B_fwd[31:0]
-        ));
+    // if reg2 is ALU B, forward to ALU B, else don't forward to ALU B
+    // Mux4to1b32  _rB_fwd_ (
+    //     .I0(ID_EXE_ALU_B[31:0]),
+    //     .I1(EXE_MEM_ALU_out[31:0]), 
+    //     .I2(MEM_WB_Data_in[31:0]),  // MEM_WB_data_in
+    //     .I3(MEM_WB_ALU_out[31:0]),
+    //     .s(ForwardB[1:0]),
+    //     .o(ALU_B_fwd[31:0]
+    //     ));
+
+    always @ (*) begin
+        if (ID_EXE_ALUSrc_B == 2'b00) begin
+            // reg2 == ALU B
+            case(ForwardB)
+                2'b00: ALU_B_fwd = ID_EXE_ALU_B;
+                2'b01: ALU_B_fwd = EXE_MEM_ALU_out;
+                2'b10: ALU_B_fwd = MEM_WB_Data_in;
+                2'b11: ALU_B_fwd = MEM_WB_ALU_out;
+                default: ALU_B_fwd = ID_EXE_ALU_B;
+            endcase
+        end 
+        else begin
+            ALU_B_fwd = ID_EXE_ALU_B;
+        end 
+    end 
     
-// EM alu out -> DE alu out -> alu A B -> buffers, DE alu A B
+// EM alu out -> DE alu out -> alu A B -> buffers, alu A B sources
     ALU _alualu_ (
         .A(ALU_A_fwd[31:0]),
         .B(ALU_B_fwd[31:0]),
