@@ -160,6 +160,8 @@ module Flusher(
     input [31:0] PC_pred,
     input [1:0] branch, // T or NT
 );
+    // Mis-predict recovery
+    
     // flush a wrong prefetched instruction (always the next one), when branch & target PC are resolved in the last cycle of D stage
     // flush it by setting cstall signal to 1. 
     //      assign cstall = (PC_tar != PC_pred)
