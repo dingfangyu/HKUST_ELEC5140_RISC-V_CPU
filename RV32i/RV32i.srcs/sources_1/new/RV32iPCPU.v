@@ -203,12 +203,12 @@ module RV32iPCPU(
         .c(add_jalr_out[31:0])
         );
     Mux4to1b32  MUX5 (
-        .I0(PC_out[31:0] + 32'b0100),   // From IF stage
+        .I0(IF_ID_PC[31:0] + 32'b0100),   // ?
         .I1(add_branch_out[31:0]),      // Containing "PC" from ID stage
         .I2(add_jal_out[31:0]),         // From ID stage
         .I3(add_jalr_out[31:0]),        // From ID stage
         .s(Branch[1:0]),                // From ID
-        .o(PC_wb_gt[31:0]) // gt!
+        .o(PC_wb_gt[31:0]) // gt
         );
 
     REG_IF_ID #(.HASH_LEN(HASH_LEN)) _if_id_ ( //
