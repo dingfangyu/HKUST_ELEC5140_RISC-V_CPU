@@ -41,7 +41,7 @@ module Global_History #(parameter HIST_LEN = 16) (
             // if this inst is a branch inst
             if (IF_ID_OPcode == 7'b1100011 && IF_ID_dstall == 0) begin
                 ghist <= ghist << 1;
-                ghist[0] <= ID_branch[1];
+                ghist[0] <= ID_branch[0];
             end
         end 
     end 
