@@ -29,11 +29,9 @@ module Branch_Target_Buffer #(
     input rst,
     // for reading BTB
     input [31:0] PC_query,  // PC in IF stage
-    input [HIST_LEN - 1:0] ghist,
-
 
     // outputs read from BTB
-    output reg [BTB_INDEX_BITS - 1:0] index,
+    output reg [BTB_INDEX_BITS - 1:0] BTB_index,
     output reg BTB_is_Branch_out, // is branch
     output reg [31:0] BTB_PC_target_out,
 
@@ -41,7 +39,7 @@ module Branch_Target_Buffer #(
     input [31:0] IF_ID_PC,
     input [6:0] IF_ID_OPcode, 
     input IF_ID_dstall,
-    input [BTB_INDEX_BITS - 1:0] IF_ID_index,
+    input [BTB_INDEX_BITS - 1:0] IF_ID_BTB_index,
 
     input [1:0] Branch,
     input [31:0] IF_ID_PC_target
@@ -51,30 +49,14 @@ module Branch_Target_Buffer #(
     reg BTB_is_Branch [0:BTB_SIZE - 1];
     reg [31:0] BTB_PC_target [0:BTB_SIZE - 1];
 
-    // query BTB
-    // function [BTB_INDEX_BITS - 1:0] branch_hash;
-    //     input [31:0] pc;
-    //     input [HIST_LEN - 1:0] ghr;
-        
-    //     reg [31:0] temp;
-        
-    //     begin
-    //         temp = pc ^ {ghr, {32-HIST_LEN{1'b0}}};
-    //         temp = temp ^ (temp >> 16);
-    //         temp = temp ^ (temp >> 8);
-            
-    //         branch_hash = temp[BTB_INDEX_BITS - 1:0];
-    //     end
-    // endfunction
-
-    // readout (in F)
+    // query BTB (F)
     always @ (*) begin
-        index = PC_query[BTB_INDEX_BITS + 1:2]; // last PC bits for BTB indexing
-        BTB_is_Branch_out = BTB_is_Branch[index];
-        BTB_PC_target_out = BTB_PC_target[index];
+        BTB_index = PC_query[BTB_INDEX_BITS + 1:2]; // last PC bits for BTB BTB_indexing
+        BTB_is_Branch_out = BTB_is_Branch[BTB_index];
+        BTB_PC_target_out = BTB_PC_target[BTB_index];
     end 
 
-    // write BTB in (D)
+    // write BTB (D)
     integer i;
     
     always @ (posedge clk or posedge rst) begin
@@ -84,10 +66,10 @@ module Branch_Target_Buffer #(
                 BTB_PC_target[i] <= 0;
             end 
         end else begin
-            // in: IF_ID_PC_out, Branch, IF_ID_PC_target, IF_ID_index
+            // in: IF_ID_PC_out, Branch, IF_ID_PC_target, IF_ID_BTB_index
             if (IF_ID_dstall == 0) begin // with this cond, there should be only one cyc in D writing BTB
-                BTB_is_Branch[IF_ID_index] <= IF_ID_OPcode == 7'b1100011;
-                BTB_PC_target[IF_ID_index] <= IF_ID_PC_target;
+                BTB_is_Branch[IF_ID_BTB_index] <= IF_ID_OPcode == 7'b1100011;
+                BTB_PC_target[IF_ID_BTB_index] <= IF_ID_PC_target;
             end 
         end 
     end 
