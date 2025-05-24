@@ -319,6 +319,19 @@ module RV32iPCPU(
 
     ID_Zero_Generator _id_zero_ (.A(ALU_A), .B(ALU_B), .ALU_operation(ALU_Control), .zero(zero));
 
+    parameter HIST_LEN = 16;
+    wire [HIST_LEN - 1:0] ghist;
+    Global_History #(.HIST_LEN(HIST_LEN)) _global_history_ (
+        .clk(clk),
+        .rst(rst),
+
+        .IF_ID_OPcode(IF_ID_inst_in[6:0]),
+        .ID_branch(Branch),
+        .IF_ID_dstall(IF_ID_dstall),
+
+        .ghist(ghist)
+    );
+
     // fwd
     wire [1:0] ID_EXE_ALUSrc_B;
     REG_ID_EXE _id_exe_ (
