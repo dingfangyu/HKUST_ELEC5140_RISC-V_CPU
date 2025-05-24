@@ -124,7 +124,7 @@ module RV32iPCPU(
     wire [1:0] ForwardA;
     wire [1:0] ForwardB;
     wire [31:0] ALU_A_fwd;
-    reg [31:0] ALU_B_fwd; // TODO: wire
+    wire [31:0] ALU_B_fwd; // TODO: wire
    
 
         
@@ -438,7 +438,7 @@ module RV32iPCPU(
     //     .o(ALU_B_fwd[31:0]
     //     ));
 
-    ALU_B_Fwd _ALU_B_fwd_(
+    RB_Fwd _rB_fwd_(
         .ID_EXE_ALUSrc_B(ID_EXE_ALUSrc_B),
         .ForwardB(ForwardB),
         

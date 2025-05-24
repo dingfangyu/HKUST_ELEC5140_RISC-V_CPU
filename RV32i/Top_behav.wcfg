@@ -12,14 +12,14 @@
    </db_ref_list>
    <zoom_setting>
       <ZoomStartTime time="0 ps"></ZoomStartTime>
-      <ZoomEndTime time="1,797 ps"></ZoomEndTime>
-      <Cursor1Time time="1,014 ps"></Cursor1Time>
+      <ZoomEndTime time="1,829 ps"></ZoomEndTime>
+      <Cursor1Time time="0 ps"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
       <NameColumnWidth column_width="218"></NameColumnWidth>
-      <ValueColumnWidth column_width="77"></ValueColumnWidth>
+      <ValueColumnWidth column_width="61"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="90" />
+   <WVObjectSize size="82" />
    <wvobject fp_name="/Top/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -44,6 +44,7 @@
    <wvobject fp_name="/Top/data_out" type="array">
       <obj_property name="ElementShortName">data_out[31:0]</obj_property>
       <obj_property name="ObjectShortName">data_out[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/Top/data_valid" type="logic">
       <obj_property name="ElementShortName">data_valid</obj_property>
@@ -52,133 +53,166 @@
    <wvobject fp_name="/Top/PC" type="array">
       <obj_property name="ElementShortName">PC[31:0]</obj_property>
       <obj_property name="ObjectShortName">PC[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="group88" type="group">
       <obj_property name="label">Data_RAM[0:30]</obj_property>
       <obj_property name="DisplayName">label</obj_property>
+      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top/Data_RAM[0]" type="array">
          <obj_property name="ElementShortName">[0][31:0]</obj_property>
          <obj_property name="ObjectShortName">[0][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[1]" type="array">
          <obj_property name="ElementShortName">[1][31:0]</obj_property>
          <obj_property name="ObjectShortName">[1][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[2]" type="array">
          <obj_property name="ElementShortName">[2][31:0]</obj_property>
          <obj_property name="ObjectShortName">[2][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[3]" type="array">
          <obj_property name="ElementShortName">[3][31:0]</obj_property>
          <obj_property name="ObjectShortName">[3][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[4]" type="array">
          <obj_property name="ElementShortName">[4][31:0]</obj_property>
          <obj_property name="ObjectShortName">[4][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[5]" type="array">
          <obj_property name="ElementShortName">[5][31:0]</obj_property>
          <obj_property name="ObjectShortName">[5][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[6]" type="array">
          <obj_property name="ElementShortName">[6][31:0]</obj_property>
          <obj_property name="ObjectShortName">[6][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[7]" type="array">
          <obj_property name="ElementShortName">[7][31:0]</obj_property>
          <obj_property name="ObjectShortName">[7][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[8]" type="array">
          <obj_property name="ElementShortName">[8][31:0]</obj_property>
          <obj_property name="ObjectShortName">[8][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[9]" type="array">
          <obj_property name="ElementShortName">[9][31:0]</obj_property>
          <obj_property name="ObjectShortName">[9][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[10]" type="array">
          <obj_property name="ElementShortName">[10][31:0]</obj_property>
          <obj_property name="ObjectShortName">[10][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[11]" type="array">
          <obj_property name="ElementShortName">[11][31:0]</obj_property>
          <obj_property name="ObjectShortName">[11][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[12]" type="array">
          <obj_property name="ElementShortName">[12][31:0]</obj_property>
          <obj_property name="ObjectShortName">[12][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[13]" type="array">
          <obj_property name="ElementShortName">[13][31:0]</obj_property>
          <obj_property name="ObjectShortName">[13][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[14]" type="array">
          <obj_property name="ElementShortName">[14][31:0]</obj_property>
          <obj_property name="ObjectShortName">[14][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[15]" type="array">
          <obj_property name="ElementShortName">[15][31:0]</obj_property>
          <obj_property name="ObjectShortName">[15][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[16]" type="array">
          <obj_property name="ElementShortName">[16][31:0]</obj_property>
          <obj_property name="ObjectShortName">[16][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[17]" type="array">
          <obj_property name="ElementShortName">[17][31:0]</obj_property>
          <obj_property name="ObjectShortName">[17][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[18]" type="array">
          <obj_property name="ElementShortName">[18][31:0]</obj_property>
          <obj_property name="ObjectShortName">[18][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[19]" type="array">
          <obj_property name="ElementShortName">[19][31:0]</obj_property>
          <obj_property name="ObjectShortName">[19][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[20]" type="array">
          <obj_property name="ElementShortName">[20][31:0]</obj_property>
          <obj_property name="ObjectShortName">[20][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[21]" type="array">
          <obj_property name="ElementShortName">[21][31:0]</obj_property>
          <obj_property name="ObjectShortName">[21][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[22]" type="array">
          <obj_property name="ElementShortName">[22][31:0]</obj_property>
          <obj_property name="ObjectShortName">[22][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[23]" type="array">
          <obj_property name="ElementShortName">[23][31:0]</obj_property>
          <obj_property name="ObjectShortName">[23][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[24]" type="array">
          <obj_property name="ElementShortName">[24][31:0]</obj_property>
          <obj_property name="ObjectShortName">[24][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[25]" type="array">
          <obj_property name="ElementShortName">[25][31:0]</obj_property>
          <obj_property name="ObjectShortName">[25][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[26]" type="array">
          <obj_property name="ElementShortName">[26][31:0]</obj_property>
          <obj_property name="ObjectShortName">[26][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[27]" type="array">
          <obj_property name="ElementShortName">[27][31:0]</obj_property>
          <obj_property name="ObjectShortName">[27][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[28]" type="array">
          <obj_property name="ElementShortName">[28][31:0]</obj_property>
          <obj_property name="ObjectShortName">[28][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[29]" type="array">
          <obj_property name="ElementShortName">[29][31:0]</obj_property>
          <obj_property name="ObjectShortName">[29][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
       <wvobject fp_name="/Top/Data_RAM[30]" type="array">
          <obj_property name="ElementShortName">[30][31:0]</obj_property>
          <obj_property name="ObjectShortName">[30][31:0]</obj_property>
+         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
       </wvobject>
    </wvobject>
    <wvobject fp_name="group97" type="group">
@@ -222,117 +256,15 @@
       <obj_property name="ObjectShortName">data_in[31:0]</obj_property>
       <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[128]" type="array">
-      <obj_property name="ElementShortName">[128][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[128][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[129]" type="array">
-      <obj_property name="ElementShortName">[129][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[129][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[130]" type="array">
-      <obj_property name="ElementShortName">[130][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[130][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[131]" type="array">
-      <obj_property name="ElementShortName">[131][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[131][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[132]" type="array">
-      <obj_property name="ElementShortName">[132][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[132][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[133]" type="array">
-      <obj_property name="ElementShortName">[133][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[133][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[134]" type="array">
-      <obj_property name="ElementShortName">[134][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[134][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[135]" type="array">
-      <obj_property name="ElementShortName">[135][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[135][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[136]" type="array">
-      <obj_property name="ElementShortName">[136][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[136][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[137]" type="array">
-      <obj_property name="ElementShortName">[137][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[137][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/inst_in" type="array">
-      <obj_property name="ElementShortName">inst_in[31:0]</obj_property>
-      <obj_property name="ObjectShortName">inst_in[31:0]</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[192]" type="array">
-      <obj_property name="ElementShortName">[192][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[192][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[193]" type="array">
-      <obj_property name="ElementShortName">[193][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[193][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[194]" type="array">
-      <obj_property name="ElementShortName">[194][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[194][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[195]" type="array">
-      <obj_property name="ElementShortName">[195][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[195][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[196]" type="array">
-      <obj_property name="ElementShortName">[196][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[196][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[197]" type="array">
-      <obj_property name="ElementShortName">[197][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[197][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[198]" type="array">
-      <obj_property name="ElementShortName">[198][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[198][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[199]" type="array">
-      <obj_property name="ElementShortName">[199][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[199][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[200]" type="array">
-      <obj_property name="ElementShortName">[200][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[200][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/Data_RAM[201]" type="array">
-      <obj_property name="ElementShortName">[201][31:0]</obj_property>
-      <obj_property name="ObjectShortName">[201][31:0]</obj_property>
-      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-   </wvobject>
    <wvobject fp_name="/Top/_rv32ipcpu_/_forwarding_unit_/ID_EXE_read_reg1" type="array">
       <obj_property name="ElementShortName">ID_EXE_read_reg1[4:0]</obj_property>
       <obj_property name="ObjectShortName">ID_EXE_read_reg1[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/Top/_rv32ipcpu_/_forwarding_unit_/ID_EXE_read_reg2" type="array">
       <obj_property name="ElementShortName">ID_EXE_read_reg2[4:0]</obj_property>
       <obj_property name="ObjectShortName">ID_EXE_read_reg2[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/Top/_rv32ipcpu_/_forwarding_unit_/EXE_MEM_RegWrite" type="logic">
       <obj_property name="ElementShortName">EXE_MEM_RegWrite</obj_property>
@@ -397,14 +329,17 @@
    <wvobject fp_name="/Top/_rv32ipcpu_/U2/rdata_A" type="array">
       <obj_property name="ElementShortName">rdata_A[31:0]</obj_property>
       <obj_property name="ObjectShortName">rdata_A[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/Top/_rv32ipcpu_/U2/rdata_B" type="array">
       <obj_property name="ElementShortName">rdata_B[31:0]</obj_property>
       <obj_property name="ObjectShortName">rdata_B[31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/Top/_rv32ipcpu_/U2/register" type="array">
       <obj_property name="ElementShortName">register[1:31][31:0]</obj_property>
       <obj_property name="ObjectShortName">register[1:31][31:0]</obj_property>
+      <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/Top/_rv32ipcpu_/U2/i" type="array">
       <obj_property name="ElementShortName">i[31:0]</obj_property>
@@ -489,10 +424,12 @@
    <wvobject fp_name="/Top/_rv32ipcpu_/_forwarding_unit_/ID_EXE_read_reg1" type="array">
       <obj_property name="ElementShortName">ID_EXE_read_reg1[4:0]</obj_property>
       <obj_property name="ObjectShortName">ID_EXE_read_reg1[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/Top/_rv32ipcpu_/_forwarding_unit_/ID_EXE_read_reg2" type="array">
       <obj_property name="ElementShortName">ID_EXE_read_reg2[4:0]</obj_property>
       <obj_property name="ObjectShortName">ID_EXE_read_reg2[4:0]</obj_property>
+      <obj_property name="Radix">UNSIGNEDDECRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/Top/_rv32ipcpu_/_forwarding_unit_/EXE_MEM_RegWrite" type="logic">
       <obj_property name="ElementShortName">EXE_MEM_RegWrite</obj_property>
@@ -537,7 +474,6 @@
    <wvobject fp_name="group277" type="group">
       <obj_property name="label">ra fwd</obj_property>
       <obj_property name="DisplayName">label</obj_property>
-      <obj_property name="isExpanded"></obj_property>
       <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_/s" type="array">
          <obj_property name="ElementShortName">s[1:0]</obj_property>
          <obj_property name="ObjectShortName">s[1:0]</obj_property>
@@ -582,36 +518,6 @@
       <obj_property name="label">ra fwd d</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_D_/s" type="array">
-         <obj_property name="ElementShortName">s[1:0]</obj_property>
-         <obj_property name="ObjectShortName">s[1:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_D_/I0" type="array">
-         <obj_property name="ElementShortName">I0[31:0]</obj_property>
-         <obj_property name="ObjectShortName">I0[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_D_/I1" type="array">
-         <obj_property name="ElementShortName">I1[31:0]</obj_property>
-         <obj_property name="ObjectShortName">I1[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_D_/I2" type="array">
-         <obj_property name="ElementShortName">I2[31:0]</obj_property>
-         <obj_property name="ObjectShortName">I2[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_D_/I3" type="array">
-         <obj_property name="ElementShortName">I3[31:0]</obj_property>
-         <obj_property name="ObjectShortName">I3[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_D_/o" type="array">
-         <obj_property name="ElementShortName">o[31:0]</obj_property>
-         <obj_property name="ObjectShortName">o[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      </wvobject>
    </wvobject>
    <wvobject fp_name="/Top/inst_in" type="array">
       <obj_property name="ElementShortName">inst_in[31:0]</obj_property>
@@ -621,35 +527,57 @@
       <obj_property name="label">rb fwd d</obj_property>
       <obj_property name="DisplayName">label</obj_property>
       <obj_property name="isExpanded"></obj_property>
-      <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_D_/s" type="array">
-         <obj_property name="ElementShortName">s[1:0]</obj_property>
-         <obj_property name="ObjectShortName">s[1:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_D_/I0" type="array">
-         <obj_property name="ElementShortName">I0[31:0]</obj_property>
-         <obj_property name="ObjectShortName">I0[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_D_/I1" type="array">
-         <obj_property name="ElementShortName">I1[31:0]</obj_property>
-         <obj_property name="ObjectShortName">I1[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_D_/I2" type="array">
-         <obj_property name="ElementShortName">I2[31:0]</obj_property>
-         <obj_property name="ObjectShortName">I2[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_D_/I3" type="array">
-         <obj_property name="ElementShortName">I3[31:0]</obj_property>
-         <obj_property name="ObjectShortName">I3[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      </wvobject>
-      <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_D_/o" type="array">
-         <obj_property name="ElementShortName">o[31:0]</obj_property>
-         <obj_property name="ObjectShortName">o[31:0]</obj_property>
-         <obj_property name="Radix">SIGNEDDECRADIX</obj_property>
-      </wvobject>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_/s" type="array">
+      <obj_property name="ElementShortName">s[1:0]</obj_property>
+      <obj_property name="ObjectShortName">s[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_/I0" type="array">
+      <obj_property name="ElementShortName">I0[31:0]</obj_property>
+      <obj_property name="ObjectShortName">I0[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_/I1" type="array">
+      <obj_property name="ElementShortName">I1[31:0]</obj_property>
+      <obj_property name="ObjectShortName">I1[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_/I2" type="array">
+      <obj_property name="ElementShortName">I2[31:0]</obj_property>
+      <obj_property name="ObjectShortName">I2[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_/I3" type="array">
+      <obj_property name="ElementShortName">I3[31:0]</obj_property>
+      <obj_property name="ObjectShortName">I3[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rA_fwd_/o" type="array">
+      <obj_property name="ElementShortName">o[31:0]</obj_property>
+      <obj_property name="ObjectShortName">o[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_/ID_EXE_ALUSrc_B" type="array">
+      <obj_property name="ElementShortName">ID_EXE_ALUSrc_B[1:0]</obj_property>
+      <obj_property name="ObjectShortName">ID_EXE_ALUSrc_B[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_/ForwardB" type="array">
+      <obj_property name="ElementShortName">ForwardB[1:0]</obj_property>
+      <obj_property name="ObjectShortName">ForwardB[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_/ID_EXE_ALU_B" type="array">
+      <obj_property name="ElementShortName">ID_EXE_ALU_B[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ID_EXE_ALU_B[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_/EXE_MEM_ALU_out" type="array">
+      <obj_property name="ElementShortName">EXE_MEM_ALU_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">EXE_MEM_ALU_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_/MEM_WB_Data_in" type="array">
+      <obj_property name="ElementShortName">MEM_WB_Data_in[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MEM_WB_Data_in[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_/MEM_WB_ALU_out" type="array">
+      <obj_property name="ElementShortName">MEM_WB_ALU_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">MEM_WB_ALU_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_rB_fwd_/ALU_B_fwd" type="array">
+      <obj_property name="ElementShortName">ALU_B_fwd[31:0]</obj_property>
+      <obj_property name="ObjectShortName">ALU_B_fwd[31:0]</obj_property>
    </wvobject>
 </wave_config>

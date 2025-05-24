@@ -3,13 +3,13 @@
 # SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Mon May 19 08:09:41 2025
-# Process ID: 12028
+# Start of session at: Sat May 24 03:02:05 2025
+# Process ID: 9888
 # Current directory: C:/Users/fdingad/Desktop/HKUST_ELEC5140_RISC-V_CPU/RV32i
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent11884 C:\Users\fdingad\Desktop\HKUST_ELEC5140_RISC-V_CPU\RV32i\RV32i.xpr
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent9480 C:\Users\fdingad\Desktop\HKUST_ELEC5140_RISC-V_CPU\RV32i\RV32i.xpr
 # Log file: C:/Users/fdingad/Desktop/HKUST_ELEC5140_RISC-V_CPU/RV32i/vivado.log
 # Journal file: C:/Users/fdingad/Desktop/HKUST_ELEC5140_RISC-V_CPU/RV32i\vivado.jou
-# Running On: CCVDIAI3012, OS: Windows, CPU Frequency: 2594 MHz, CPU Physical cores: 4, Host memory: 17178 MB
+# Running On: CCVDIAI3010, OS: Windows, CPU Frequency: 2594 MHz, CPU Physical cores: 4, Host memory: 17178 MB
 #-----------------------------------------------------------
 start_gui
 open_project C:/Users/fdingad/Desktop/HKUST_ELEC5140_RISC-V_CPU/RV32i/RV32i.xpr
@@ -17,4 +17,7 @@ launch_simulation
 open_wave_config C:/Users/fdingad/Desktop/HKUST_ELEC5140_RISC-V_CPU/RV32i/Top_behav.wcfg
 source Top.tcl
 update_compile_order -fileset sources_1
+launch_runs impl_1 -to_step write_bitstream -jobs 4
+wait_on_run impl_1
 relaunch_sim
+close_sim
