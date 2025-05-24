@@ -21,10 +21,9 @@
 
 
 module Branch_Target_Buffer #(
-    parameter BTB_SIZE = 1024,
-    parameter BTB_INDEX_BITS = 10, // 2**10 == 1024
-    parameter HIST_LEN = 16,
-    parameter BTB_INDEX_BITS = 8
+    parameter BTB_SIZE = 256,
+    parameter BTB_INDEX_BITS = 8, 
+    parameter HIST_LEN = 16
 ) (
     input clk,
     input rst,

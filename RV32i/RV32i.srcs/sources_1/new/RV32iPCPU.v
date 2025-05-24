@@ -134,8 +134,8 @@ module RV32iPCPU(
     wire [HASH_LEN - 1:0] index;
     wire [HASH_LEN - 1:0] IF_ID_index;
 
-    parameter BTB_SIZE = 1024;
-    parameter BTB_INDEX_BITS = 10;
+    parameter BTB_SIZE = 256;
+    parameter BTB_INDEX_BITS = 8;
     wire BTB_is_Branch_out;
     wire [31:0] BTB_PC_target_out;
 
@@ -348,8 +348,7 @@ module RV32iPCPU(
     Branch_Target_Buffer #(
         .BTB_SIZE(BTB_SIZE),
         .BTB_INDEX_BITS(BTB_INDEX_BITS),
-        .HIST_LEN(HIST_LEN),
-        .HASH_LEN(HASH_LEN)
+        .HIST_LEN(HIST_LEN)
     ) _BTB_ (
         .clk(clk),
         .rst(rst),
