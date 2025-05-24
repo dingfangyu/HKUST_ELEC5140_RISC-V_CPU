@@ -220,7 +220,7 @@ module RV32iPCPU(
         .IF_ID_PC(IF_ID_PC),
         .IF_ID_BTB_index(IF_ID_BTB_index), // BTB
         .IF_ID_BP_index(IF_ID_BP_index) // BP
-        .IF_ID_prediction(IF_ID_prediction),  // BP
+        .IF_ID_prediction(IF_ID_prediction)  // BP
         );
 
    // ID:-------------------------------------------------------------------------------------------
