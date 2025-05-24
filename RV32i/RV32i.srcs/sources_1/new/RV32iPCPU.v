@@ -434,6 +434,7 @@ module RV32iPCPU(
         // from F/D
         .IF_ID_PC_pred(IF_ID_PC_pred),
         .PC_wb_gt(PC_wb_gt), // from MUX5, D stage
+        .IF_ID_dstall(IF_ID_dstall),
 
         .PC_pred(PC_pred),
         .PC_wb(PC_wb),  // ?
