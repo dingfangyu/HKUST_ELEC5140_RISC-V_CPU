@@ -63,7 +63,7 @@ module PC_Fetcher (
                 if (BTB_is_Branch_out && prediction) PC_wb = BTB_PC_target_out;
                 else PC_wb = PC_query + 32'b0100;
             end else begin 
-                IF_ID_cstall = 1;
+                // IF_ID_cstall = 1;
                 PC_wb = PC_wb_gt; 
             end 
         end 
