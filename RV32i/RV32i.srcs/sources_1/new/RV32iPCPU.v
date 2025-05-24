@@ -126,10 +126,11 @@ module RV32iPCPU(
     wire [31:0] ALU_A_fwd;
     wire [31:0] ALU_B_fwd; 
 
-    // branch predictor
+    // ghist
     parameter HIST_LEN = 16;
     wire [HIST_LEN - 1:0] ghist;
     
+    // BTB
     parameter HASH_LEN = 8;
     wire [HASH_LEN - 1:0] BTB_index;
     wire [HASH_LEN - 1:0] IF_ID_BTB_index;
@@ -138,6 +139,17 @@ module RV32iPCPU(
     parameter BTB_INDEX_BITS = 8;
     wire BTB_is_Branch_out;
     wire [31:0] BTB_PC_target_out;
+
+    // BP
+    parameter BP_SIZE = 256;
+    parameter BP_INDEX_BITS = 8;
+    parameter HIST_LEN = 16;
+    parameter CTR_BITS = 2;
+
+    wire [BP_INDEX_BITS - 1:0] BP_index;
+    wire [CTR_BITS - 1:0] BP_ctr_out;
+    wire prediction; 
+    wire [BP_INDEX_BITS - 1:0] IF_ID_BP_index;
 
         
     Control_Stall _cstall_ (
@@ -199,11 +211,13 @@ module RV32iPCPU(
         // Input
         .inst_in(inst_in),
         .PC(PC_out),
-        .BTB_index(BTB_index), // 
+        .BTB_index(BTB_index), // BTB 
+        .BP_index(BP_index), // BP
         // Output
         .IF_ID_inst_in(IF_ID_inst_in),
         .IF_ID_PC(IF_ID_PC),
-        .IF_ID_BTB_index(IF_ID_BTB_index) //
+        .IF_ID_BTB_index(IF_ID_BTB_index), // BTB
+        .IF_ID_BP_index(IF_ID_BP_index) // BP
         );
 
    // ID:-------------------------------------------------------------------------------------------
@@ -368,9 +382,33 @@ module RV32iPCPU(
 
         .Branch(Branch),
         .IF_ID_PC_target(add_branch_out)
-
     );
     
+    // BP 
+    Branch_Predictor #(
+        .BP_SIZE(BP_SIZE),
+        .BP_INDEX_BITS(BP_INDEX_BITS), 
+        .HIST_LEN(HIST_LEN),
+        .CTR_BITS(CTR_BITS)
+    ) _BP_ (
+        .clk(clk),
+        .rst(rst),
+
+        // for reading BP
+        .PC_query(PC_out),  // PC in IF stage
+        .ghist(ghist),
+
+        // outputs read from BP
+        .BP_index(BP_index),
+        .BP_ctr_out(BP_ctr_out),
+        .prediction(prediction), 
+
+        // // for writing BP
+        .IF_ID_OPcode(IF_ID_inst_in[6:0]), 
+        .IF_ID_dstall(IF_ID_dstall),
+        .IF_ID_BP_index(IF_ID_BP_index),
+        .Branch(Branch)
+    )
 
     // fwd
     wire [1:0] ID_EXE_ALUSrc_B;
