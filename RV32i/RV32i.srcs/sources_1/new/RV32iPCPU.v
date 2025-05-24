@@ -193,7 +193,7 @@ module RV32iPCPU(
         .o(PC_wb[31:0])
         );
 
-    REG_IF_ID _if_id_ #(.HASH_LEN(HASH_LEN)) (
+    REG_IF_ID #(.HASH_LEN(HASH_LEN)) _if_id_ ( //
         .clk(clk), .rst(rst), .CE(V5),
         .IF_ID_dstall(IF_ID_dstall), .IF_ID_cstall(IF_ID_cstall),
         // Input
