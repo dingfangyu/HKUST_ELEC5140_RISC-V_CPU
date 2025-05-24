@@ -70,7 +70,7 @@ module Branch_Target_Buffer #(
 
     // readout (in F)
     always @ (*) begin
-        index = branch_hash(PC_query, ghist, HASH_LEN);
+        index = branch_hash(PC_query, ghist);
         BTB_Branch_out = BTB_Branch[index];
         BTB_PC_target_out = BTB_PC_target[index];
     end 
