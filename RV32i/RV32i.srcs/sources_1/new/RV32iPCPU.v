@@ -411,7 +411,7 @@ module RV32iPCPU(
         .IF_ID_dstall(IF_ID_dstall),
         .IF_ID_BP_index(IF_ID_BP_index),
         .Branch(Branch)
-    )
+    );
 
     // fwd
     wire [1:0] ID_EXE_ALUSrc_B;
