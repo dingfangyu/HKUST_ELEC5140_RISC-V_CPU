@@ -3,25 +3,13 @@
 # SW Build 3865809 on Sun May  7 15:05:29 MDT 2023
 # IP Build 3864474 on Sun May  7 20:36:21 MDT 2023
 # SharedData Build 3865790 on Sun May 07 13:33:03 MDT 2023
-# Start of session at: Sat May 24 03:14:09 2025
-# Process ID: 10520
-# Current directory: C:/Users/fdingad/Desktop/2-vec/RV32i
-# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent3608 C:\Users\fdingad\Desktop\2-vec\RV32i\RV32i.xpr
-# Log file: C:/Users/fdingad/Desktop/2-vec/RV32i/vivado.log
-# Journal file: C:/Users/fdingad/Desktop/2-vec/RV32i\vivado.jou
-# Running On: CCVDIAI3010, OS: Windows, CPU Frequency: 2594 MHz, CPU Physical cores: 4, Host memory: 17178 MB
+# Start of session at: Sat May 24 21:08:01 2025
+# Process ID: 6876
+# Current directory: C:/Users/fdingad/Desktop/3-vec/RV32i
+# Command line: vivado.exe -gui_launcher_event rodinguilauncherevent8748 C:\Users\fdingad\Desktop\3-vec\RV32i\RV32i.xpr
+# Log file: C:/Users/fdingad/Desktop/3-vec/RV32i/vivado.log
+# Journal file: C:/Users/fdingad/Desktop/3-vec/RV32i\vivado.jou
+# Running On: CCVDIAI3009, OS: Windows, CPU Frequency: 2594 MHz, CPU Physical cores: 4, Host memory: 17178 MB
 #-----------------------------------------------------------
-start_guioopen_project C:/Users/fdingad/Desktop/2-vec/RV32i/RV32i.xprlaunch_simulation
-open_wave_config C:/Users/fdingad/Desktop/2-vec/RV32i/Top_behav.wcfg
-source Top.tcl
-update_compile_order -fileset sources_1
-save_wave_config {C:/Users/fdingad/Desktop/2-vec/RV32i/Top_behav.wcfg}
-close_sim
-launch_simulation
-open_wave_config C:/Users/fdingad/Desktop/2-vec/RV32i/Top_behav.wcfg
-source Top.tcl
-current_wave_config {Top_behav.wcfg}
-add_wave {{/Top/Data_RAM}} 
-relaunch_sim
-save_wave_config {C:/Users/fdingad/Desktop/2-vec/RV32i/Top_behav.wcfg}
-close_sim
+start_gui
+open_project C:/Users/fdingad/Desktop/3-vec/RV32i/RV32i.xpr
