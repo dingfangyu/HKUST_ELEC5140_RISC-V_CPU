@@ -24,7 +24,7 @@ module Branch_Target_Buffer #(
     parameter BTB_SIZE = 1024,
     parameter BTB_INDEX_BITS = 10, // 2**10 == 1024
     parameter HIST_LEN = 16,
-    parameter HASH_LEN = 8,
+    parameter HASH_LEN = 8
 ) (
     input clk,
     input rst,
@@ -50,9 +50,9 @@ module Branch_Target_Buffer #(
 
     // query BTB
     function [HASH_LEN - 1:0] hash_PC_ghist;
-        input [31:0] PC,
-        input [HIST_LEN - 1:0] ghist
-        ;
+        input [31:0] PC;
+        input [HIST_LEN - 1:0] ghist;
+        
         begin
             hash_PC_ghist = PC[HASH_LEN + 1:2] ^ ghist[HASH_LEN - 1:0];
         end 
