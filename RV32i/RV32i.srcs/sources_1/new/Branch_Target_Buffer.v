@@ -36,7 +36,6 @@ module Branch_Target_Buffer #(
     input [31:0] IF_ID_PC,
     input [6:0] IF_ID_OPcode, 
     input IF_ID_dstall,
-
     input [31:0] IF_ID_PC_target,
 
     // outputs from BTB
@@ -52,19 +51,27 @@ module Branch_Target_Buffer #(
     function [HASH_LEN - 1:0] hash_PC_ghist;
         input [31:0] PC;
         input [HIST_LEN - 1:0] ghist;
-        
         begin
             hash_PC_ghist = PC[HASH_LEN + 1:2] ^ ghist[HASH_LEN - 1:0];
         end 
     endfunction 
 
-    // readout
+    // readout (in F)
     always @ (*) begin
         index = hash_PC_ghist(PC_query, ghist);
         BTB_Branch_out = BTB_Branch[index];
         BTB_PC_target_out = BTB_PC_target[index];
     end 
 
-    // write BTB
+    // write BTB in (D)
+    always @ (posedge clk or posedge rst) begin
+        if (rst) begin
+            integer i;
+            for (i = 0; i < BTB_SIZE; i = i + 1) begin
+                BTB_Branch[i] <= 0;
+                BTB_PC_target[i] <= 0;
+            end 
+        end 
+    end 
 
 endmodule
