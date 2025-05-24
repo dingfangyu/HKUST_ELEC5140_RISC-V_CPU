@@ -182,7 +182,7 @@ module RV32iPCPU(
     REG32 _pc_ (
         .CE(V5),
         .clk(clk),
-        .D(PC_wb_gt[31:0]),
+        .D(PC_wb[31:0]),
         .rst(rst),
         .Q(PC_out[31:0]),
         .PC_dstall(PC_dstall)

@@ -55,9 +55,10 @@ module PC_Fetcher (
     
     
     always @ (*) begin
+        IF_ID_cstall = 0;
         // pred in F
         if (BTB_is_Branch_out && prediction) PC_pred = BTB_PC_target_out;
-        else PC_pred = PC_query + 4;
+        else PC_pred = PC_query + 32'b0100;
 
         PC_wb = PC_pred;
 
