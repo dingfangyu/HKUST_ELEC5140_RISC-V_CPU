@@ -20,7 +20,7 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-module Branch_Target_Buffer#(
+module Branch_Target_Buffer #(
     parameter BTB_SIZE = 1024,
     parameter BTB_INDEX_BITS = 10, // 2**10 == 1024
     parameter HIST_LEN = 16,
@@ -40,7 +40,7 @@ module Branch_Target_Buffer#(
     input [31:0] IF_ID_PC_target,
 
     // outputs from BTB
-    output [HASH_LEN - 1:0] reg index,
+    output reg [HASH_LEN - 1:0] index,
     output reg BTB_Branch_out, // is branch
     output reg [31:0] BTB_PC_target_out
 );
