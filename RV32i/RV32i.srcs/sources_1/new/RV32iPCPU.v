@@ -337,9 +337,7 @@ module RV32iPCPU(
 
     parameter BTB_SIZE = 1024;
     parameter BTB_INDEX_BITS = 10;
-    parameter HIST_LEN = 16;
     parameter HASH_LEN = 8;
-
 
     wire [HASH_LEN - 1:0] index;
     wire BTB_Branch_out;
