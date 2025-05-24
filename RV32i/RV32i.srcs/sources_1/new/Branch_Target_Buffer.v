@@ -56,9 +56,15 @@ module Branch_Target_Buffer #(
     function [HASH_LEN - 1:0] hash_PC_ghist;
         input [31:0] PC;
         input [HIST_LEN - 1:0] ghist;
+        reg [31:0] temp;
+    
         begin
-            hash_PC_ghist = PC[HASH_LEN + 1:2] ^ ghist[HASH_LEN - 1:0];
-        end 
+            temp = pc ^ {ghist, (32-HIST_LEN)1'b0};
+            temp = temp ^ (temp >> 16);
+            temp = temp ^ (temp >> 8); // e.g. HASH_LEN \le 8
+            
+            hash_PC_ghist = temp[HASH_LEN - 1:0];
+        end
     endfunction 
 
     // readout (in F)
