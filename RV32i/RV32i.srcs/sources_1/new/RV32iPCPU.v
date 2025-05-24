@@ -366,8 +366,10 @@ module RV32iPCPU(
         .IF_ID_PC(IF_ID_PC),
         .IF_ID_OPcode(IF_ID_inst_in[6:0]), 
         .IF_ID_dstall(IF_ID_dstall),
-        .IF_ID_PC_target(add_branch_out),
-        .IF_ID_index(IF_ID_index)
+        .IF_ID_index(IF_ID_index),
+
+        .Branch(Branch),
+        .IF_ID_PC_target(add_branch_out)
 
     );
     

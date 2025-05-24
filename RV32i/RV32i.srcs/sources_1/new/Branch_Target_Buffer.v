@@ -32,17 +32,21 @@ module Branch_Target_Buffer #(
     input [31:0] PC_query,  // PC in IF stage
     input [HIST_LEN - 1:0] ghist,
 
+
+    // outputs read from BTB
+    output reg [HASH_LEN - 1:0] index,
+    output reg BTB_Branch_out, // is branch
+    output reg [31:0] BTB_PC_target_out
+
     // for writing BTB
     input [31:0] IF_ID_PC,
     input [6:0] IF_ID_OPcode, 
     input IF_ID_dstall,
-    input [31:0] IF_ID_PC_target,
     input [HASH_LEN - 1:0] IF_ID_index,
 
-    // outputs from BTB
-    output reg [HASH_LEN - 1:0] index,
-    output reg BTB_Branch_out, // is branch
-    output reg [31:0] BTB_PC_target_out
+    input [1:0] Branch,
+    input [31:0] IF_ID_PC_target
+
 );
     // data BTB
     reg BTB_Branch [0:BTB_SIZE - 1];
@@ -75,7 +79,7 @@ module Branch_Target_Buffer #(
             end 
         end else begin
             // in: IF_ID_PC_out, Branch, IF_ID_PC_target, IF_ID_index
-            if (IF_ID_dstall == 0) begin // the cycle when the branch is resolved in D
+            if (IF_ID_dstall == 0 && IF_ID_OPcode == 7'b1100011) begin // the cycle when the branch is resolved in D
                 BTB_Branch[IF_ID_index] <= Branch[0];
                 BTB_PC_target[IF_ID_index] <= IF_ID_PC_target;
             end 
