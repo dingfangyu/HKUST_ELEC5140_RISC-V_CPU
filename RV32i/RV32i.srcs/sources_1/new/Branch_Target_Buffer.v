@@ -36,7 +36,7 @@ module Branch_Target_Buffer #(
     // outputs read from BTB
     output reg [HASH_LEN - 1:0] index,
     output reg BTB_Branch_out, // is branch
-    output reg [31:0] BTB_PC_target_out
+    output reg [31:0] BTB_PC_target_out,
 
     // for writing BTB
     input [31:0] IF_ID_PC,

@@ -360,7 +360,7 @@ module RV32iPCPU(
         // outputs read from BTB
         .index(index),
         .BTB_Branch_out(BTB_Branch_out), // is branch
-        .BTB_PC_target_out(BTB_PC_target_out)
+        .BTB_PC_target_out(BTB_PC_target_out),
 
         // for writing BTB
         .IF_ID_PC(IF_ID_PC),
