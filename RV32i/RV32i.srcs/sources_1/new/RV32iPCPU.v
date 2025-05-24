@@ -136,7 +136,7 @@ module RV32iPCPU(
 
     parameter BTB_SIZE = 1024;
     parameter BTB_INDEX_BITS = 10;
-    wire BTB_Branch_out;
+    wire BTB_is_Branch_out;
     wire [31:0] BTB_PC_target_out;
 
         
@@ -359,7 +359,7 @@ module RV32iPCPU(
 
         // outputs read from BTB
         .index(index),
-        .BTB_Branch_out(BTB_Branch_out), // is branch
+        .BTB_is_Branch_out(BTB_is_Branch_out), // is branch
         .BTB_PC_target_out(BTB_PC_target_out),
 
         // for writing BTB
