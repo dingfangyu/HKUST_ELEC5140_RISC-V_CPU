@@ -58,10 +58,14 @@ module PC_Fetcher (
 
         IF_ID_cstall = 0;
 
-        if (PC_wb_gt != 0 && IF_ID_dstall == 0) begin 
-            if (IF_ID_PC_wb == PC_wb_gt) begin 
-                if (BTB_is_Branch_out && prediction) PC_wb = BTB_PC_target_out;
-                else PC_wb = PC_query + 32'b0100;
+        if (BTB_is_Branch_out && prediction) PC_pred = BTB_PC_target_out;
+        else PC_pred = PC_query + 32'b0100;
+
+        PC_wb = PC_pred;
+
+        if (IF_ID_dstall == 0) begin 
+            if (IF_ID_PC_wb != 0 && IF_ID_PC_wb == PC_wb_gt) begin 
+                // nothing
             end else begin 
                 IF_ID_cstall = 1;
                 PC_wb = PC_wb_gt; 
