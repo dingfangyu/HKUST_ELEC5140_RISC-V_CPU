@@ -156,6 +156,7 @@ module RV32iPCPU(
     wire [31:0] PC_pred;
     wire [31:0] IF_ID_PC_pred;
     wire [31:0] PC_wb_gt;
+    wire [31:0] IF_ID_PC_wb;
 
         
     // Control_Stall _cstall_ (
@@ -220,12 +221,14 @@ module RV32iPCPU(
         .BTB_index(BTB_index), // BTB 
         .BP_index(BP_index), // BP
         .prediction(prediction),  // BP
+        .PC_wb(PC_wb),
         // Output
         .IF_ID_inst_in(IF_ID_inst_in),
         .IF_ID_PC(IF_ID_PC),
         .IF_ID_BTB_index(IF_ID_BTB_index), // BTB
         .IF_ID_BP_index(IF_ID_BP_index), // BP
         .IF_ID_prediction(IF_ID_prediction)  // BP
+        .IF_ID_PC_wb(IF_ID_PC_wb),
         );
 
    // ID:-------------------------------------------------------------------------------------------
@@ -432,7 +435,7 @@ module RV32iPCPU(
         .prediction(prediction), 
 
         // from F/D
-        .IF_ID_PC_pred(IF_ID_PC_pred),
+        .IF_ID_PC_wb(IF_ID_PC_wb),
         .PC_wb_gt(PC_wb_gt), // from MUX5, D stage
         .IF_ID_dstall(IF_ID_dstall),
 

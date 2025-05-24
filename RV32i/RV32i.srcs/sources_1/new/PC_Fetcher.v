@@ -43,7 +43,7 @@ module PC_Fetcher (
     input prediction, 
 
     // from F/D
-    input [31:0] IF_ID_PC_pred,
+    input [31:0] IF_ID_PC_wb,
     input [31:0] PC_wb_gt, // from MUX5, D stage
     input IF_ID_dstall,
 
@@ -59,10 +59,9 @@ module PC_Fetcher (
         IF_ID_cstall = 0;
 
         if (IF_ID_dstall == 0) begin 
-            if (IF_ID_PC_pred == PC_wb_gt) begin 
-                if (BTB_is_Branch_out && prediction) PC_pred = BTB_PC_target_out;
-                else PC_pred = PC_query + 32'b0100;
-                PC_wb = PC_pred;
+            if (IF_ID_PC_wb == PC_wb_gt) begin 
+                if (BTB_is_Branch_out && prediction) PC_wb = BTB_PC_target_out;
+                else PC_wb = PC_query + 32'b0100;
             end else begin 
                 IF_ID_cstall = 1;
                 PC_wb = PC_wb_gt; 
