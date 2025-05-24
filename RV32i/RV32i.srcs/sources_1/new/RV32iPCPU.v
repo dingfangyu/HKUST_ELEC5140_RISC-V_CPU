@@ -131,7 +131,7 @@ module RV32iPCPU(
     wire [HIST_LEN - 1:0] ghist;
     
     // BTB
-    parameter HASH_LEN = 8;
+    parameter HASH_LEN = 8; 
     wire [HASH_LEN - 1:0] BTB_index;
     wire [HASH_LEN - 1:0] IF_ID_BTB_index;
 
@@ -143,7 +143,6 @@ module RV32iPCPU(
     // BP
     parameter BP_SIZE = 256;
     parameter BP_INDEX_BITS = 8;
-    parameter HIST_LEN = 16;
     parameter CTR_BITS = 2;
 
     wire [BP_INDEX_BITS - 1:0] BP_index;
