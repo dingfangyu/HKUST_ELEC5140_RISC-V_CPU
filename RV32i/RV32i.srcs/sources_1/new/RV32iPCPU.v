@@ -405,12 +405,15 @@ module RV32iPCPU(
         .BP_ctr_out(BP_ctr_out),
         .prediction(prediction), 
 
-        // // for writing BP
+        // for writing BP
         .IF_ID_OPcode(IF_ID_inst_in[6:0]), 
         .IF_ID_dstall(IF_ID_dstall),
         .IF_ID_BP_index(IF_ID_BP_index),
         .Branch(Branch)
     );
+
+    // pc wb
+
 
     // fwd
     wire [1:0] ID_EXE_ALUSrc_B;
