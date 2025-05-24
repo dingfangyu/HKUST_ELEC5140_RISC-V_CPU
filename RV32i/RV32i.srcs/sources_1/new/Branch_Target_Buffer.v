@@ -53,24 +53,24 @@ module Branch_Target_Buffer #(
     reg [31:0] BTB_PC_target [0:BTB_SIZE - 1];
 
     // query BTB
-    function [HASH_LEN - 1:0] branch_hash;
-        input [31:0] pc;
-        input [HIST_LEN - 1:0] ghr;
+    // function [HASH_LEN - 1:0] branch_hash;
+    //     input [31:0] pc;
+    //     input [HIST_LEN - 1:0] ghr;
         
-        reg [31:0] temp;
+    //     reg [31:0] temp;
         
-        begin
-            temp = pc ^ {ghr, {32-HIST_LEN{1'b0}}};
-            temp = temp ^ (temp >> 16);
-            temp = temp ^ (temp >> 8);
+    //     begin
+    //         temp = pc ^ {ghr, {32-HIST_LEN{1'b0}}};
+    //         temp = temp ^ (temp >> 16);
+    //         temp = temp ^ (temp >> 8);
             
-            branch_hash = temp[HASH_LEN - 1:0];
-        end
-    endfunction
+    //         branch_hash = temp[HASH_LEN - 1:0];
+    //     end
+    // endfunction
 
     // readout (in F)
     always @ (*) begin
-        index = branch_hash(PC_query, ghist);
+        index = PC_query[HASH_LEN + 1:2]; // last PC bits for BTB indexing
         BTB_Branch_out = BTB_Branch[index];
         BTB_PC_target_out = BTB_PC_target[index];
     end 
@@ -86,8 +86,8 @@ module Branch_Target_Buffer #(
             end 
         end else begin
             // in: IF_ID_PC_out, Branch, IF_ID_PC_target, IF_ID_index
-            if (IF_ID_dstall == 0 && IF_ID_OPcode == 7'b1100011) begin // the cycle when the branch is resolved in D
-                BTB_Branch[IF_ID_index] <= Branch[0];
+            if (IF_ID_dstall == 0) begin // with this cond, there should be only one cyc in D writing BTB
+                BTB_Branch[IF_ID_index] <= (Branch[0] && IF_ID_OPcode == 7'b1100011);
                 BTB_PC_target[IF_ID_index] <= IF_ID_PC_target;
             end 
         end 
