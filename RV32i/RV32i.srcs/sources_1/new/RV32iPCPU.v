@@ -124,8 +124,20 @@ module RV32iPCPU(
     wire [1:0] ForwardA;
     wire [1:0] ForwardB;
     wire [31:0] ALU_A_fwd;
-    wire [31:0] ALU_B_fwd; // TODO: wire
-   
+    wire [31:0] ALU_B_fwd; 
+
+    // branch predictor
+    parameter HIST_LEN = 16;
+    wire [HIST_LEN - 1:0] ghist;
+    
+    parameter HASH_LEN = 8;
+    wire [HASH_LEN - 1:0] index;
+    wire [HASH_LEN - 1:0] IF_ID_index;
+
+    parameter BTB_SIZE = 1024;
+    parameter BTB_INDEX_BITS = 10;
+    wire BTB_Branch_out;
+    wire [31:0] BTB_PC_target_out;
 
         
     Control_Stall _cstall_ (
@@ -181,16 +193,17 @@ module RV32iPCPU(
         .o(PC_wb[31:0])
         );
 
-
     REG_IF_ID _if_id_ (
         .clk(clk), .rst(rst), .CE(V5),
         .IF_ID_dstall(IF_ID_dstall), .IF_ID_cstall(IF_ID_cstall),
         // Input
         .inst_in(inst_in),
         .PC(PC_out),
+        .index(index), // 
         // Output
         .IF_ID_inst_in(IF_ID_inst_in),
-        .IF_ID_PC(IF_ID_PC)
+        .IF_ID_PC(IF_ID_PC),
+        .IF_ID_index(IF_ID_index) //
         );
 
    // ID:-------------------------------------------------------------------------------------------
@@ -319,10 +332,7 @@ module RV32iPCPU(
 
     ID_Zero_Generator _id_zero_ (.A(ALU_A), .B(ALU_B), .ALU_operation(ALU_Control), .zero(zero));
 
-    //// branch predictor
-    parameter HIST_LEN = 16;
-    wire [HIST_LEN - 1:0] ghist;
-
+    // ghist
     Global_History #(.HIST_LEN(HIST_LEN)) _global_history_ (
         .clk(clk),
         .rst(rst),
@@ -334,15 +344,7 @@ module RV32iPCPU(
         .ghist(ghist)
     );
 
-
-    parameter BTB_SIZE = 1024;
-    parameter BTB_INDEX_BITS = 10;
-    parameter HASH_LEN = 8;
-
-    wire [HASH_LEN - 1:0] index;
-    wire BTB_Branch_out;
-    wire [31:0] BTB_PC_target_out;
-
+    // BTB
     Branch_Target_Buffer #(
         .BTB_SIZE(BTB_SIZE),
         .BTB_INDEX_BITS(BTB_INDEX_BITS),
@@ -355,16 +357,18 @@ module RV32iPCPU(
         .PC_query(PC_out),
         .ghist(ghist),
 
+        // outputs read from BTB
+        .index(index),
+        .BTB_Branch_out(BTB_Branch_out), // is branch
+        .BTB_PC_target_out(BTB_PC_target_out)
+
         // for writing BTB
         .IF_ID_PC(IF_ID_PC),
         .IF_ID_OPcode(IF_ID_inst_in[6:0]), 
         .IF_ID_dstall(IF_ID_dstall),
         .IF_ID_PC_target(add_branch_out),
+        .IF_ID_index(IF_ID_index)
 
-        // outputs from BTB
-        .index(index),
-        .BTB_Branch_out(BTB_Branch_out), // is branch
-        .BTB_PC_target_out(BTB_PC_target_out)
     );
     
 
