@@ -20,10 +20,6 @@
 //////////////////////////////////////////////////////////////////////////////////
 
 
-    wire [BP_INDEX_BITS - 1:0] BP_index;
-    wire [CTR_BITS - 1:0] BP_ctr_out;
-    wire prediction; 
-    wire [BP_INDEX_BITS - 1:0] IF_ID_BP_index;
 
 module REG_IF_ID #(
     parameter BTB_INDEX_BITS = 8,
@@ -39,11 +35,13 @@ module REG_IF_ID #(
         input [31:0] PC,
         input [BTB_INDEX_BITS - 1:0] BTB_index, // BTB
         input [BP_INDEX_BITS - 1:0] BP_index,
+        input prediction,
         
         output reg [31:0] IF_ID_inst_in,
         output reg [31:0] IF_ID_PC = 0,
         output reg [BTB_INDEX_BITS - 1:0] IF_ID_BTB_index, // BTB
-        output reg [BP_INDEX_BITS - 1:0] IF_ID_BP_index
+        output reg [BP_INDEX_BITS - 1:0] IF_ID_BP_index,
+        output reg IF_ID_prediction
 
     );
     always @ (posedge clk or posedge rst) begin
