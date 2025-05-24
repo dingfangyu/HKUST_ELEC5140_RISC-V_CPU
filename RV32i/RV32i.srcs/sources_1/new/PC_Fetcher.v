@@ -63,8 +63,8 @@ module PC_Fetcher (
 
         PC_wb = PC_pred;
 
-        if (IF_ID_dstall == 0) begin 
-            if (IF_ID_PC_wb != 0 && IF_ID_PC_wb == PC_wb_gt) begin 
+        if (IF_ID_PC_wb != 0 && IF_ID_dstall == 0) begin 
+            if (IF_ID_PC_wb == PC_wb_gt) begin 
                 // nothing
             end else begin 
                 IF_ID_cstall = 1;
