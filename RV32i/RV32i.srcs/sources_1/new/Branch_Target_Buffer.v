@@ -53,23 +53,40 @@ module Branch_Target_Buffer #(
     reg [31:0] BTB_PC_target [0:BTB_SIZE - 1];
 
     // query BTB
-    function [HASH_LEN - 1:0] hash_PC_ghist;
-        input [31:0] PC;
-        input [HIST_LEN - 1:0] ghist;
-        reg [31:0] temp;
-    
+    function [HASH_LEN-1:0] branch_hash;
+        input [31:0] pc;                  // 32位程序计数器
+        input [HIST_LEN-1:0] ghr;         // 参数化的全局分支历史寄存器
+        input integer HASH_LEN;            // 哈希结果位宽
+        
+        reg [31:0] pc_xor;                // PC的XOR折叠结果
+        reg [HIST_LEN-1:0] ghr_xor;       // GHR的XOR折叠结果
+        reg [HASH_LEN-1:0] hash;          // 最终哈希结果
+        integer i;
+        
         begin
-            temp = pc ^ {ghist, (32-HIST_LEN)1'b0};
-            temp = temp ^ (temp >> 16);
-            temp = temp ^ (temp >> 8); // e.g. HASH_LEN \le 8
+            // 第一步：对PC进行XOR折叠到HASH_LEN*2位
+            pc_xor = {HASH_LEN*2{1'b0}};  // 初始化为0
+            for (i = 0; i < 32/(HASH_LEN*2); i = i + 1) begin
+                pc_xor = pc_xor ^ pc[i*(HASH_LEN*2) +: HASH_LEN*2];
+            end
             
-            hash_PC_ghist = temp[HASH_LEN - 1:0];
+            // 第二步：对GHR进行XOR折叠到HASH_LEN*2位
+            ghr_xor = {HASH_LEN*2{1'b0}}; // 初始化为0
+            for (i = 0; i < HIST_LEN/(HASH_LEN*2); i = i + 1) begin
+                ghr_xor = ghr_xor ^ ghr[i*(HASH_LEN*2) +: HASH_LEN*2];
+            end
+            
+            // 第三步：组合PC和GHR的折叠结果，再进行一次XOR
+            hash = pc_xor[HASH_LEN-1:0] ^ ghr_xor[HASH_LEN-1:0];
+            
+            // 返回哈希结果
+            branch_hash = hash;
         end
-    endfunction 
+    endfunction
 
     // readout (in F)
     always @ (*) begin
-        index = hash_PC_ghist(PC_query, ghist);
+        index = branch_hash(PC_query, ghist, HASH_LEN);
         BTB_Branch_out = BTB_Branch[index];
         BTB_PC_target_out = BTB_PC_target[index];
     end 
