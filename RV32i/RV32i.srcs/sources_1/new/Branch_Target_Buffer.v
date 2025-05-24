@@ -64,9 +64,9 @@ module Branch_Target_Buffer #(
     end 
 
     // write BTB in (D)
+    integer i;
     always @ (posedge clk or posedge rst) begin
         if (rst) begin
-            integer i;
             for (i = 0; i < BTB_SIZE; i = i + 1) begin
                 BTB_Branch[i] <= 0;
                 BTB_PC_target[i] <= 0;
