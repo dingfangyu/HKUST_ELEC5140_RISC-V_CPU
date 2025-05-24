@@ -21,3 +21,85 @@ close_sim
 close [ open C:/Users/fdingad/Desktop/3-vec/RV32i/RV32i.srcs/sources_1/new/Global_History.v w ]
 add_files C:/Users/fdingad/Desktop/3-vec/RV32i/RV32i.srcs/sources_1/new/Global_History.v
 update_compile_order -fileset sources_1
+launch_simulation
+open_wave_config C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg
+source Top.tcl
+update_compile_order -fileset sources_1
+relaunch_sim
+save_wave_config {C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg}
+close_sim
+launch_simulation
+open_wave_config C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg
+source Top.tcl
+save_wave_config {C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg}
+close_sim
+close [ open C:/Users/fdingad/Desktop/3-vec/RV32i/RV32i.srcs/sources_1/new/Branch_Target_Buffer.v w ]
+add_files C:/Users/fdingad/Desktop/3-vec/RV32i/RV32i.srcs/sources_1/new/Branch_Target_Buffer.v
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg
+source Top.tcl
+relaunch_sim
+save_wave_config {C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg}
+close_sim
+launch_simulation
+launch_simulation
+launch_simulation
+update_compile_order -fileset sources_1
+launch_simulation
+update_compile_order -fileset sources_1
+launch_simulation
+update_compile_order -fileset sources_1
+launch_simulation
+open_wave_config C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg
+source Top.tcl
+update_compile_order -fileset sources_1
+save_wave_config {C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg}
+close_sim
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg
+source Top.tcl
+close_sim
+launch_simulation
+open_wave_config C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg
+source Top.tcl
+close_sim
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg
+source Top.tcl
+relaunch_sim
+save_wave_config {C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg}
+close_sim
+close [ open C:/Users/fdingad/Desktop/3-vec/RV32i/RV32i.srcs/sources_1/new/Branch_Predictor.v w ]
+add_files C:/Users/fdingad/Desktop/3-vec/RV32i/RV32i.srcs/sources_1/new/Branch_Predictor.v
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg
+source Top.tcl
+close_sim
+launch_simulation
+update_compile_order -fileset sources_1
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+launch_simulation
+open_wave_config C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg
+source Top.tcl
+relaunch_sim
+save_wave_config {C:/Users/fdingad/Desktop/3-vec/RV32i/Top_behav.wcfg}
+close_sim
+close [ open C:/Users/fdingad/Desktop/3-vec/RV32i/RV32i.srcs/sources_1/new/PC_Fetcher.v w ]
+add_files C:/Users/fdingad/Desktop/3-vec/RV32i/RV32i.srcs/sources_1/new/PC_Fetcher.v
+update_compile_order -fileset sources_1
