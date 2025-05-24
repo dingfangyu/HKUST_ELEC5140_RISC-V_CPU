@@ -36,12 +36,14 @@ module REG_IF_ID #(
         input [BTB_INDEX_BITS - 1:0] BTB_index, // BTB
         input [BP_INDEX_BITS - 1:0] BP_index,
         input prediction,
+        input [31:0] PC_pred,
         
         output reg [31:0] IF_ID_inst_in,
         output reg [31:0] IF_ID_PC = 0,
         output reg [BTB_INDEX_BITS - 1:0] IF_ID_BTB_index, // BTB
         output reg [BP_INDEX_BITS - 1:0] IF_ID_BP_index,
-        output reg IF_ID_prediction
+        output reg IF_ID_prediction,
+        output reg [31:0] IF_ID_PC_pred
 
     );
     always @ (posedge clk or posedge rst) begin
@@ -56,12 +58,14 @@ module REG_IF_ID #(
                 IF_ID_PC <= 32'h00000000;
                 IF_ID_BTB_index <= 0;
                 IF_ID_BP_index <= 0;
+                IF_ID_PC_pred <= 0;
             end
             else if (CE) begin
                 IF_ID_inst_in <= inst_in;
                 IF_ID_PC <= PC;
                 IF_ID_BTB_index <= BTB_index;
                 IF_ID_BP_index <= BP_index;
+                IF_ID_PC_pred <= PC_pred;
             end
         end
         // else: if stall, then nothing changes here

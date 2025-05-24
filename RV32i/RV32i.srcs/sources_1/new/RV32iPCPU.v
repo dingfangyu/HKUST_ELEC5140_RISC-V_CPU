@@ -151,11 +151,17 @@ module RV32iPCPU(
     wire [BP_INDEX_BITS - 1:0] IF_ID_BP_index;
     wire IF_ID_prediction;
 
+    // PC fetcher & cstall 
+
+    wire [31:0] PC_pred;
+    wire [31:0] IF_ID_PC_pred;
+    wire [31:0] PC_wb_gt;
+
         
-    Control_Stall _cstall_ (
-        .Branch(Branch[1:0]),
-        .IF_ID_cstall(IF_ID_cstall)
-        );
+    // Control_Stall _cstall_ (
+    //     .Branch(Branch[1:0]),
+    //     .IF_ID_cstall(IF_ID_cstall)
+    //     );
 
     assign ALU_out = EXE_MEM_ALU_out;
     assign data_out = EXE_MEM_Data_out;
@@ -202,7 +208,7 @@ module RV32iPCPU(
         .I2(add_jal_out[31:0]),         // From ID stage
         .I3(add_jalr_out[31:0]),        // From ID stage
         .s(Branch[1:0]),                // From ID
-        .o(PC_wb[31:0])
+        .o(PC_wb_gt[31:0]) // gt!
         );
 
     REG_IF_ID #(.HASH_LEN(HASH_LEN)) _if_id_ ( //
@@ -412,7 +418,27 @@ module RV32iPCPU(
         .Branch(Branch)
     );
 
-    // pc wb
+    //
+    PC_Fetcher (
+        .clk(clk),
+        .rst(rst),
+        .PC_query(PC_out),
+
+        // from BTB
+        .BTB_is_Branch_out(BTB_is_Branch_out), // is branch
+        .BTB_PC_target_out(BTB_PC_target_out),
+
+        // from BP
+        .prediction(prediction), 
+
+        // from F/D
+        .IF_ID_PC_pred(IF_ID_PC_pred),
+        .PC_wb_gt(PC_wb_gt), // from MUX5, D stage
+
+        .PC_pred(PC_pred),
+        .PC_wb(PC_wb),  // ?
+        .IF_ID_cstall(IF_ID_cstall)
+    );
 
 
     // fwd
