@@ -55,17 +55,18 @@ module PC_Fetcher (
     
     
     always @ (*) begin
+
         IF_ID_cstall = 0;
-        // pred in F
-        if (BTB_is_Branch_out && prediction) PC_pred = BTB_PC_target_out;
-        else PC_pred = PC_query + 32'b0100;
 
-        PC_wb = PC_pred;
-
-        // validation in D
-        if (IF_ID_PC_pred != PC_wb_gt && IF_ID_dstall == 0) begin 
-            IF_ID_cstall = 1;
-            PC_wb = PC_wb_gt; 
+        if (IF_ID_dstall == 0) begin 
+            if (IF_ID_PC_pred == PC_wb_gt) begin 
+                if (BTB_is_Branch_out && prediction) PC_pred = BTB_PC_target_out;
+                else PC_pred = PC_query + 32'b0100;
+                PC_wb = PC_pred;
+            end else begin 
+                IF_ID_cstall = 1;
+                PC_wb = PC_wb_gt; 
+            end 
         end 
     end 
 
