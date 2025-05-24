@@ -11,15 +11,15 @@
       </db_ref>
    </db_ref_list>
    <zoom_setting>
-      <ZoomStartTime time="269 ps"></ZoomStartTime>
-      <ZoomEndTime time="974 ps"></ZoomEndTime>
-      <Cursor1Time time="856 ps"></Cursor1Time>
+      <ZoomStartTime time="900 ps"></ZoomStartTime>
+      <ZoomEndTime time="1,033 ps"></ZoomEndTime>
+      <Cursor1Time time="922 ps"></Cursor1Time>
    </zoom_setting>
    <column_width_setting>
-      <NameColumnWidth column_width="152"></NameColumnWidth>
-      <ValueColumnWidth column_width="119"></ValueColumnWidth>
+      <NameColumnWidth column_width="214"></NameColumnWidth>
+      <ValueColumnWidth column_width="63"></ValueColumnWidth>
    </column_width_setting>
-   <WVObjectSize size="22" />
+   <WVObjectSize size="34" />
    <wvobject fp_name="/Top/clk" type="logic">
       <obj_property name="ElementShortName">clk</obj_property>
       <obj_property name="ObjectShortName">clk</obj_property>
@@ -272,14 +272,6 @@
       <obj_property name="ElementShortName">ID_EXE_dstall</obj_property>
       <obj_property name="ObjectShortName">ID_EXE_dstall</obj_property>
    </wvobject>
-   <wvobject fp_name="/Top/_rv32ipcpu_/_global_history_/clk" type="logic">
-      <obj_property name="ElementShortName">clk</obj_property>
-      <obj_property name="ObjectShortName">clk</obj_property>
-   </wvobject>
-   <wvobject fp_name="/Top/_rv32ipcpu_/_global_history_/rst" type="logic">
-      <obj_property name="ElementShortName">rst</obj_property>
-      <obj_property name="ObjectShortName">rst</obj_property>
-   </wvobject>
    <wvobject fp_name="/Top/_rv32ipcpu_/_global_history_/IF_ID_OPcode" type="array">
       <obj_property name="ElementShortName">IF_ID_OPcode[6:0]</obj_property>
       <obj_property name="ObjectShortName">IF_ID_OPcode[6:0]</obj_property>
@@ -295,10 +287,65 @@
    <wvobject fp_name="/Top/_rv32ipcpu_/_global_history_/ghist" type="array">
       <obj_property name="ElementShortName">ghist[15:0]</obj_property>
       <obj_property name="ObjectShortName">ghist[15:0]</obj_property>
-      <obj_property name="Radix">BINARYRADIX</obj_property>
    </wvobject>
    <wvobject fp_name="/Top/_rv32ipcpu_/_global_history_/HIST_LEN" type="array">
       <obj_property name="ElementShortName">HIST_LEN[31:0]</obj_property>
       <obj_property name="ObjectShortName">HIST_LEN[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/PC_query" type="array">
+      <obj_property name="ElementShortName">PC_query[31:0]</obj_property>
+      <obj_property name="ObjectShortName">PC_query[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/ghist" type="array">
+      <obj_property name="ElementShortName">ghist[15:0]</obj_property>
+      <obj_property name="ObjectShortName">ghist[15:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/index" type="array">
+      <obj_property name="ElementShortName">index[7:0]</obj_property>
+      <obj_property name="ObjectShortName">index[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/BTB_is_Branch_out" type="logic">
+      <obj_property name="ElementShortName">BTB_is_Branch_out</obj_property>
+      <obj_property name="ObjectShortName">BTB_is_Branch_out</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/BTB_PC_target_out" type="array">
+      <obj_property name="ElementShortName">BTB_PC_target_out[31:0]</obj_property>
+      <obj_property name="ObjectShortName">BTB_PC_target_out[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/IF_ID_PC" type="array">
+      <obj_property name="ElementShortName">IF_ID_PC[31:0]</obj_property>
+      <obj_property name="ObjectShortName">IF_ID_PC[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/IF_ID_OPcode" type="array">
+      <obj_property name="ElementShortName">IF_ID_OPcode[6:0]</obj_property>
+      <obj_property name="ObjectShortName">IF_ID_OPcode[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/IF_ID_dstall" type="logic">
+      <obj_property name="ElementShortName">IF_ID_dstall</obj_property>
+      <obj_property name="ObjectShortName">IF_ID_dstall</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/IF_ID_index" type="array">
+      <obj_property name="ElementShortName">IF_ID_index[7:0]</obj_property>
+      <obj_property name="ObjectShortName">IF_ID_index[7:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/Branch" type="array">
+      <obj_property name="ElementShortName">Branch[1:0]</obj_property>
+      <obj_property name="ObjectShortName">Branch[1:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/IF_ID_PC_target" type="array">
+      <obj_property name="ElementShortName">IF_ID_PC_target[31:0]</obj_property>
+      <obj_property name="ObjectShortName">IF_ID_PC_target[31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/BTB_is_Branch" type="array">
+      <obj_property name="ElementShortName">BTB_is_Branch[0:255]</obj_property>
+      <obj_property name="ObjectShortName">BTB_is_Branch[0:255]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/_rv32ipcpu_/_BTB_/BTB_PC_target" type="array">
+      <obj_property name="ElementShortName">BTB_PC_target[0:255][31:0]</obj_property>
+      <obj_property name="ObjectShortName">BTB_PC_target[0:255][31:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/Top/inst_in" type="array">
+      <obj_property name="ElementShortName">inst_in[31:0]</obj_property>
+      <obj_property name="ObjectShortName">inst_in[31:0]</obj_property>
    </wvobject>
 </wave_config>
