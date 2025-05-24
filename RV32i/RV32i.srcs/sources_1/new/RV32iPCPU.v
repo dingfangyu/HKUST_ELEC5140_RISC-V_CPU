@@ -419,7 +419,7 @@ module RV32iPCPU(
     );
 
     //
-    PC_Fetcher (
+    PC_Fetcher _pc_fetcher_ (
         .clk(clk),
         .rst(rst),
         .PC_query(PC_out),
