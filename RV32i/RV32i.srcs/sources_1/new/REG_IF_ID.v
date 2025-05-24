@@ -38,6 +38,7 @@ module REG_IF_ID #(
         input prediction,
         input [31:0] PC_pred,
         input [31:0] PC_gt,
+        input [31:0] PC_wb,
         
         output reg [31:0] IF_ID_inst_in,
         output reg [31:0] IF_ID_PC = 0,
