@@ -31,11 +31,11 @@ module REG_IF_ID #(
         
         input [31:0] inst_in,
         input [31:0] PC,
-        input [HASH_LEN - 1:0] index, // for branch predictor
+        input [HASH_LEN - 1:0] BTB_index, // for branch predictor
         
         output reg [31:0] IF_ID_inst_in,
         output reg [31:0] IF_ID_PC = 0,
-        output reg [HASH_LEN - 1:0] IF_ID_index // for branch predictor
+        output reg [HASH_LEN - 1:0] IF_ID_BTB_index // for branch predictor
 
     );
     always @ (posedge clk or posedge rst) begin
@@ -48,12 +48,12 @@ module REG_IF_ID #(
             if (rst == 1 || IF_ID_cstall == 1'b1) begin
                 IF_ID_inst_in <= 32'h00000013;
                 IF_ID_PC <= 32'h00000000;
-                IF_ID_index <= 0;
+                IF_ID_BTB_index <= 0;
             end
             else if (CE) begin
                 IF_ID_inst_in <= inst_in;
                 IF_ID_PC <= PC;
-                IF_ID_index <= index;
+                IF_ID_BTB_index <= BTB_index;
             end
         end
         // else: if stall, then nothing changes here
